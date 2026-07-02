@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EntityLink — מצגת</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --primary:#E8612D; --primary-dark:#c94f1f; --primary-light:#ff7a45;
+        --dark:#0f172a; --dark-800:#1e293b; --dark-700:#334155;
+        --gray-100:#f8fafc; --gray-200:#e2e8f0; --gray-300:#cbd5e1;
+        --gray-400:#94a3b8; --gray-500:#64748b; --gray-600:#475569; --white:#ffffff;
+        --na:#3b82f6; --emea:#8b5cf6; --apac:#06b6d4; --cala:#f59e0b; --israel:#10b981;
+        --font-he:'Heebo',sans-serif; --font-en:'Inter',sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+        font-family:var(--font-he);
+        background:var(--gray-100);
+        color:var(--dark);
+        overflow:hidden;
+        -webkit-font-smoothing:antialiased;
+    }
+
+    .deck{height:100vh;width:100vw;position:relative;}
+    .slide{
+        position:absolute;inset:0;
+        display:none;
+        flex-direction:column;
+        justify-content:center;
+        padding:6vh 7vw;
+        background:
+            radial-gradient(ellipse 60% 50% at 85% 15%, rgba(232,97,45,.06) 0%, transparent 60%),
+            linear-gradient(180deg,#ffffff 0%,#f8fafc 100%);
+    }
+    .slide.active{display:flex;animation:fade .4s ease;}
+    @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+    /* subtle grid backdrop */
+    .slide::after{
+        content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+        background-image:linear-gradient(var(--gray-200) 1px,transparent 1px),linear-gradient(90deg,var(--gray-200) 1px,transparent 1px);
+        background-size:46px 46px;
+        -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 0%,transparent 75%);
+                mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 0%,transparent 75%);
+    }
+    .slide > *{position:relative;z-index:1;}
+
+    .kicker{
+        color:var(--primary);font-weight:700;font-size:.95rem;letter-spacing:.08em;
+        text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.55rem;
+    }
+    .kicker::before{content:"";width:30px;height:3px;background:var(--primary);border-radius:3px;}
+
+    h1{font-size:4.6rem;font-weight:900;line-height:1.05;letter-spacing:-1px;color:var(--dark);}
+    h1 .accent{color:var(--primary);}
+    .title-logo{height:104px;width:auto;max-width:64vw;}
+    .subtitle{font-size:1.85rem;font-weight:400;color:var(--gray-500);margin-top:1.8rem;max-width:26ch;line-height:1.45;}
+
+    h2{font-size:3rem;font-weight:800;line-height:1.12;margin-bottom:1.8rem;letter-spacing:-.5px;color:var(--dark);}
+    h2 .accent{color:var(--primary);}
+    .lead{font-size:1.6rem;color:var(--gray-500);font-weight:300;line-height:1.5;max-width:34ch;}
+
+    ul{list-style:none;display:flex;flex-direction:column;gap:1rem;font-size:1.4rem;}
+    ul li{display:flex;align-items:flex-start;gap:.85rem;color:var(--dark-700);font-weight:400;line-height:1.35;}
+    ul li .ic{font-size:1.5rem;flex-shrink:0;line-height:1.2;}
+    ul li b{font-weight:700;color:var(--dark);}
+
+    /* ---- Split layout: text + screenshot ---- */
+    .split{display:grid;grid-template-columns:1fr 1.15fr;gap:3.5vw;align-items:center;}
+    .split .txt h2{font-size:2.5rem;margin-bottom:1.3rem;}
+    .split .txt ul{font-size:1.28rem;gap:.85rem;}
+
+    /* ---- Feature grid (solution slide) ---- */
+    .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:.5rem;}
+    .fcard{
+        background:var(--white);border:1px solid var(--gray-200);border-radius:16px;
+        padding:1.5rem 1.4rem;box-shadow:0 8px 24px rgba(15,23,42,.05);
+    }
+    .fcard .fi{width:48px;height:48px;border-radius:12px;background:rgba(232,97,45,.09);
+        display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:.9rem;}
+    .fcard h3{font-size:1.28rem;font-weight:700;color:var(--dark);margin-bottom:.35rem;}
+    .fcard p{font-size:1rem;color:var(--gray-500);line-height:1.4;}
+
+    /* ---- Browser window chrome (screenshots) ---- */
+    .window{
+        background:var(--white);border:1px solid var(--gray-200);border-radius:16px;
+        box-shadow:0 30px 70px rgba(15,23,42,.14);overflow:hidden;direction:ltr;
+    }
+    .win-bar{display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;background:var(--gray-100);border-bottom:1px solid var(--gray-200);}
+    .dots{display:flex;gap:.4rem;}
+    .dots span{width:11px;height:11px;border-radius:50%;}
+    .dots span:nth-child(1){background:#ff5f57;}
+    .dots span:nth-child(2){background:#febc2e;}
+    .dots span:nth-child(3){background:#28c840;}
+    .win-title{font-family:var(--font-en);font-size:.8rem;color:var(--gray-500);font-weight:500;margin-inline-start:.4rem;}
+    .win-body{padding:1.4rem;font-family:var(--font-en);}
+    .shot{display:block;width:100%;height:auto;}
+
+    /* ORG TREE mockup */
+    .tree{display:flex;flex-direction:column;align-items:center;gap:0;padding:.4rem 0 1rem;}
+    .tnode{
+        background:var(--white);border:1px solid var(--gray-200);border-radius:12px;
+        padding:.6rem .9rem;min-width:140px;text-align:center;box-shadow:0 4px 12px rgba(15,23,42,.06);
+        position:relative;border-top:3px solid var(--gray-400);
+    }
+    .tnode .nm{font-weight:700;font-size:.92rem;color:var(--dark);}
+    .tnode .mt{font-size:.72rem;color:var(--gray-500);margin-top:.15rem;}
+    .tnode.root{border-top-color:var(--primary);min-width:180px;}
+    .tconn{width:2px;height:26px;background:var(--gray-300);}
+    .trow{display:flex;gap:1.3rem;position:relative;}
+    .trow::before{content:"";position:absolute;top:-14px;left:12%;right:12%;height:2px;background:var(--gray-300);}
+    .tchild{display:flex;flex-direction:column;align-items:center;}
+    .tchild .tconn{height:14px;}
+    .na{border-top-color:var(--na)!important;} .emea{border-top-color:var(--emea)!important;}
+    .apac{border-top-color:var(--apac)!important;} .israel{border-top-color:var(--israel)!important;}
+    .cala{border-top-color:var(--cala)!important;}
+
+    /* ENTITY table mockup */
+    .app{display:grid;grid-template-columns:150px 1fr;min-height:290px;}
+    .side{background:var(--dark);padding:1.1rem .9rem;display:flex;flex-direction:column;gap:.5rem;}
+    .side .logo{color:#fff;font-weight:800;font-size:1rem;margin-bottom:.6rem;}
+    .side .logo b{color:var(--primary-light);}
+    .snav{color:#cbd5e1;font-size:.82rem;padding:.45rem .6rem;border-radius:7px;display:flex;align-items:center;gap:.5rem;}
+    .snav.on{background:rgba(232,97,45,.16);color:#fff;font-weight:600;}
+    .main{padding:1.1rem 1.2rem;}
+    .mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;}
+    .mhead h4{font-size:1rem;color:var(--dark);font-weight:700;}
+    .pill{background:var(--primary);color:#fff;font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:20px;}
+    table{width:100%;border-collapse:collapse;font-size:.8rem;}
+    th{text-align:left;color:var(--gray-400);font-weight:600;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;padding:.4rem .5rem;border-bottom:1px solid var(--gray-200);}
+    td{padding:.55rem .5rem;border-bottom:1px solid var(--gray-100);color:var(--dark-700);}
+    td .cn{font-weight:600;color:var(--dark);}
+    .badge{font-size:.68rem;font-weight:600;padding:.2rem .55rem;border-radius:20px;}
+    .b-active{background:rgba(16,185,129,.12);color:#059669;}
+    .b-pending{background:rgba(245,158,11,.14);color:#b45309;}
+    .flag{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+
+    /* WORKFLOW mockup */
+    .flow{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:1.2rem;}
+    .step{flex:1;text-align:center;}
+    .step .sc{width:38px;height:38px;border-radius:50%;margin:0 auto .4rem;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;}
+    .step .sl{font-size:.72rem;color:var(--gray-500);font-weight:600;}
+    .step.done .sc{background:var(--israel);color:#fff;}
+    .step.cur .sc{background:var(--primary);color:#fff;box-shadow:0 0 0 5px rgba(232,97,45,.15);}
+    .step.wait .sc{background:var(--gray-200);color:var(--gray-500);}
+    .arrow{color:var(--gray-300);font-size:1.1rem;flex:0 0 auto;}
+    .tasks{display:flex;flex-direction:column;gap:.55rem;}
+    .task{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;background:var(--gray-100);border-radius:10px;border-left:3px solid var(--gray-300);}
+    .task.risk{border-left-color:#ef4444;} .task.proc{border-left-color:var(--primary);} .task.ok{border-left-color:var(--israel);}
+    .task .tn{font-size:.82rem;color:var(--dark);font-weight:600;}
+    .task .td{font-size:.7rem;color:var(--gray-500);}
+    .st{font-size:.68rem;font-weight:700;padding:.22rem .6rem;border-radius:20px;}
+    .st-risk{background:rgba(239,68,68,.12);color:#dc2626;}
+    .st-proc{background:rgba(232,97,45,.12);color:var(--primary-dark);}
+    .st-ok{background:rgba(16,185,129,.12);color:#059669;}
+
+    /* stats */
+    .stats{display:flex;gap:3.5rem;margin:2.2rem 0;}
+    .stat .num{font-size:4rem;font-weight:900;color:var(--primary);line-height:1;}
+    .stat .lbl{font-size:1.15rem;color:var(--gray-500);margin-top:.5rem;}
+    .closing-tag{font-size:1.7rem;font-weight:700;margin-top:.5rem;color:var(--dark);}
+    .closing-tag .accent{color:var(--primary);}
+
+    /* contact */
+    .contact{margin-top:1.6rem;display:flex;flex-direction:column;gap:.55rem;font-size:1.4rem;color:var(--dark-700);}
+    .contact .row{display:flex;align-items:center;gap:.7rem;}
+    .contact .row .ic{color:var(--primary);font-size:1.3rem;}
+    .contact .name{font-size:1.9rem;font-weight:800;color:var(--dark);}
+    .thanks{font-size:3.6rem;font-weight:900;color:var(--dark);}
+    .thanks .accent{color:var(--primary);}
+
+    /* footer / progress */
+    .deck-footer{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+        padding:.85rem 2rem;font-size:.85rem;color:var(--gray-400);z-index:30;}
+    .brand-mini{font-weight:800;color:var(--dark);letter-spacing:.3px;}
+    .brand-mini span{color:var(--primary);}
+    .progress{position:fixed;top:0;left:0;height:4px;background:var(--primary);transition:width .4s ease;z-index:40;}
+    .timing{font-variant-numeric:tabular-nums;}
+    .hint{position:fixed;bottom:.85rem;left:50%;transform:translateX(-50%);font-size:.75rem;color:var(--gray-400);z-index:30;}
+
+    @media print{
+        @page{size:landscape;margin:0;}
+        html,body{height:auto;overflow:visible;background:#fff;}
+        .deck{height:auto;}
+        .slide{display:flex!important;position:relative;inset:auto;height:100vh;page-break-after:always;
+            -webkit-print-color-adjust:exact;print-color-adjust:exact;}
+        .deck-footer,.progress{position:static;} .hint{display:none;}
+    }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+    <!-- 1 — Title -->
+    <section class="slide active" data-time="0:00–0:30">
+        <div class="kicker">פלטפורמת ניהול ישויות משפטיות ארגונית</div>
+        <img src="../entitylink_logo2.svg" alt="EntityLink" class="title-logo">
+        <p class="subtitle">ניהול ישויות משפטיות בעידן של צמיחה, רגולציה ומורכבות תאגידית</p>
+    </section>
+
+    <!-- 2 — Problem -->
+    <section class="slide" data-time="0:30–1:15">
+        <div class="kicker">האתגר</div>
+        <h2>המידע קיים — <span class="accent">אבל הוא מפוזר</span></h2>
+        <ul>
+            <li><span class="ic">📊</span><span>מידע מפוזר בין אקסלים, מיילים ומערכות נפרדות</span></li>
+            <li><span class="ic">🧩</span><span>קושי לראות את מבנה האחזקות המלא במבט אחד</span></li>
+            <li><span class="ic">⏰</span><span>דדליינים רגולטוריים שמתפספסים</span></li>
+            <li><span class="ic">🌐</span><span>חוסר שקיפות בין מדינות וגופים</span></li>
+        </ul>
+    </section>
+
+    <!-- 3 — Solution / capabilities grid -->
+    <section class="slide" data-time="1:15–2:00">
+        <div class="kicker">הפתרון · יכולות הפלטפורמה</div>
+        <h2>פלטפורמה <span class="accent">אחת</span> לניהול כל הישויות</h2>
+        <div class="fgrid">
+            <div class="fcard"><div class="fi">🏢</div><h3>ניהול ישויות</h3><p>פרופיל מלא לכל חברה לאורך כל מחזור החיים</p></div>
+            <div class="fcard"><div class="fi">🌳</div><h3>עץ ארגוני</h3><p>מבנה האחזקות והבעלות במבט אחד</p></div>
+            <div class="fcard"><div class="fi">⚙️</div><h3>תהליכי עבודה</h3><p>Workflows וציות אוטומטיים עם דדליינים</p></div>
+            <div class="fcard"><div class="fi">🗺️</div><h3>מפה גלובלית</h3><p>כל הישויות לפי אזור, סטטוס וסוג</p></div>
+            <div class="fcard"><div class="fi">📁</div><h3>ארכיון מסמכים</h3><p>תיעוד מלא עם בקרת גרסאות</p></div>
+            <div class="fcard"><div class="fi">📊</div><h3>דוחות ואנליטיקה</h3><p>ייצוא ל-PDF/Excel ומעקב KPI</p></div>
+        </div>
+    </section>
+
+    <!-- 4 — Org Tree (screenshot) -->
+    <section class="slide" data-time="2:00–3:00">
+        <div class="split">
+            <div class="txt">
+                <div class="kicker">הדמיה אינטראקטיבית</div>
+                <h2>עץ ארגוני — כל המבנה <span class="accent">במבט אחד</span></h2>
+                <ul>
+                    <li><span class="ic">🔗</span><span>מבנה אחזקות, חברות בנות ובעלי מניות</span></li>
+                    <li><span class="ic">📈</span><span>אחוזי החזקה, זכויות הצבעה וסוגי מניות</span></li>
+                    <li><span class="ic">🎨</span><span>צבעים לפי אזור · סינון · ייצוא ל-PDF</span></li>
+                </ul>
+            </div>
+            <div class="window">
+                <div class="win-bar"><div class="dots"><span></span><span></span><span></span></div><div class="win-title">EntityLink — Org Chart</div></div>
+                <img class="shot" src="screenshots/02-org-chart.png" alt="Org Chart">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5 — Entity Management (screenshot) -->
+    <section class="slide" data-time="3:00–4:00">
+        <div class="split">
+            <div class="txt">
+                <div class="kicker">ניהול ישויות</div>
+                <h2>כל ישות — <span class="accent">פרופיל מלא</span></h2>
+                <ul>
+                    <li><span class="ic">🏢</span><span>חברות קבוצה, סניפים וספקי שירות במקום אחד</span></li>
+                    <li><span class="ic">👥</span><span>נושאי משרה, מורשי חתימה ובעלי מניות</span></li>
+                    <li><span class="ic">🗂️</span><span>מספרי רישום, נתוני מס, אינטגרציית SAP וסטטוס</span></li>
+                </ul>
+            </div>
+            <div class="window">
+                <div class="win-bar"><div class="dots"><span></span><span></span><span></span></div><div class="win-title">EntityLink — Legal Entities</div></div>
+                <img class="shot" src="screenshots/01-legal-entities.png" alt="Legal Entities">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6 — Workflows & Compliance (screenshot) -->
+    <section class="slide" data-time="4:00–5:00">
+        <div class="split">
+            <div class="txt">
+                <div class="kicker">תהליכי עבודה · Workflows</div>
+                <h2>ציות אוטומטי — <span class="accent">בלי הפתעות</span></h2>
+                <ul>
+                    <li><span class="ic">🔔</span><span>תהליכי עבודה ותזכורות אוטומטיים לכל דדליין</span></li>
+                    <li><span class="ic">⚖️</span><span>חוקיות לפי מדינה, מדינת-משנה וישות</span></li>
+                    <li><span class="ic">🚦</span><span>חיווי סיכון: בתהליך · בסיכון · הושלם</span></li>
+                </ul>
+            </div>
+            <div class="window">
+                <div class="win-bar"><div class="dots"><span></span><span></span><span></span></div><div class="win-title">EntityLink — Compliance Workflows</div></div>
+                <img class="shot" src="screenshots/03-compliance.png" alt="Compliance Workflows">
+            </div>
+        </div>
+    </section>
+
+    <!-- 7 — Closing stats -->
+    <section class="slide" data-time="5:00–5:40">
+        <div class="kicker">השורה התחתונה</div>
+        <h2>ממשרדים מפוזרים → <span class="accent">לשליטה אחת</span></h2>
+        <div class="stats">
+            <div class="stat"><div class="num">+500</div><div class="lbl">ישויות מנוהלות</div></div>
+            <div class="stat"><div class="num">+50</div><div class="lbl">מדינות</div></div>
+            <div class="stat"><div class="num">100%</div><div class="lbl">מעקב ציות</div></div>
+        </div>
+        <p class="closing-tag">Entity<span class="accent">Link</span> — נהלו כל ישות, מעבר לכל גבול.</p>
+    </section>
+
+    <!-- 8 — Thanks / Contact -->
+    <section class="slide" data-time="דמו + שאלות">
+        <p class="thanks">תודה <span class="accent">רבה</span></p>
+        <img src="../entitylink_logo2.svg" alt="EntityLink" class="title-logo" style="height:64px;margin:1.4rem 0;">
+        <div class="contact">
+            <div class="row name">ניל דהאן</div>
+            <div class="row">סמנכ״ל מוצר</div>
+            <div class="row"><span class="ic">✉️</span><span>neild@sqlink.com</span></div>
+        </div>
+    </section>
+
+</div>
+
+<div class="deck-footer">
+    <div class="brand-mini">Entity<span>Link</span></div>
+    <div><span class="timing" id="timing">0:00–0:30</span> &nbsp;·&nbsp; <span id="counter">1 / 8</span></div>
+</div>
+<div class="hint">← → / רווח למעבר · F למסך מלא · Ctrl/⌘+P להדפסה</div>
+
+<script>
+    const slides=[...document.querySelectorAll('.slide')];
+    let i=0;
+    const progress=document.getElementById('progress');
+    const counter=document.getElementById('counter');
+    const timing=document.getElementById('timing');
+    function show(n){
+        i=Math.max(0,Math.min(slides.length-1,n));
+        slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+        progress.style.width=((i+1)/slides.length*100)+'%';
+        counter.textContent=(i+1)+' / '+slides.length;
+        timing.textContent=slides[i].dataset.time;
+    }
+    document.addEventListener('keydown',e=>{
+        if(e.key==='ArrowLeft'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(i+1);}
+        else if(e.key==='ArrowRight'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+        else if(e.key==='Home') show(0);
+        else if(e.key==='End') show(slides.length-1);
+        else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement)document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
+    });
+    document.getElementById('deck').addEventListener('click',()=>show(i+1));
+    show(0);
+</script>
+</body>
+</html>
