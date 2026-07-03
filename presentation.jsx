@@ -1001,7 +1001,7 @@ function EntitiesSlide({ active }) {
         <div style={{ position: "relative" }}>
           <MacWindow active={active} title="EntityLink — Legal Entities" src={A("/screenshots/01-legal-entities.png")} delay={450} />
           <Callout active={active} delay={1500} color={B.na} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
-            <FlatIcon name="building" size={16} color={B.na} /> +500 ישויות מנוהלות
+            <FlatIcon name="building" size={16} color={B.na} /> כל הישויות — רשימה אחת
           </Callout>
           <Callout active={active} delay={1750} color={B.primary} style={{ top: "38%", insetInlineStart: "-30px" }}>
             <FlatIcon name="users" size={16} color={B.primary} /> מורשי חתימה
@@ -1585,9 +1585,9 @@ function StatsSlide({ active }) {
           ממידע מפוזר — <span style={{ color: B.primary }}>לשליטה אחת</span>
         </h2>
         <div style={{ display: "flex", justifyContent: "center", gap: "clamp(48px, 7vw, 110px)", marginBottom: 60 }}>
-          <StatBlock active={active} delay={600} target={500} prefix="+" label="ישויות מנוהלות" />
+          <StatBlock active={active} delay={600} target={1} label="מקור אמת" />
           <StatBlock active={active} delay={850} target={50} prefix="+" label="מדינות" />
-          <StatBlock active={active} delay={1100} target={100} suffix="%" label="מעקב ציות" />
+          <StatBlock active={active} delay={1100} target={100} suffix="%" label="תיעוד ומעקב" />
         </div>
         <div
           style={{
