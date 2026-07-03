@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>EntityLink — כרטיסיות דיבור</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --primary:#E8612D; --primary-dark:#c94f1f;
+    --dark:#0f172a; --dark-700:#334155;
+    --gray-200:#e2e8f0; --gray-400:#94a3b8; --gray-500:#64748b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Heebo',sans-serif;color:var(--dark);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+  .card{
+    page-break-after:always;
+    min-height:100vh;
+    padding:14mm 16mm 12mm;
+    display:flex;flex-direction:column;
+    position:relative;
+  }
+  .card:last-child{page-break-after:auto;}
+
+  .head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid var(--primary);padding-bottom:5mm;margin-bottom:7mm;}
+  .num{font-size:13pt;font-weight:700;color:var(--primary);letter-spacing:.06em;}
+  .title{font-size:23pt;font-weight:900;letter-spacing:-.5px;}
+  .time{font-family:'Inter',sans-serif;font-size:12pt;font-weight:700;color:var(--gray-500);font-variant-numeric:tabular-nums;direction:ltr;}
+
+  .cue{
+    background:rgba(232,97,45,.07);border:1px solid rgba(232,97,45,.3);border-radius:10px;
+    padding:3.5mm 5mm;margin-bottom:6mm;
+    font-size:11.5pt;font-weight:600;color:var(--primary-dark);
+  }
+  .cue::before{content:"🎬 ";}
+
+  .speech p{
+    font-size:15.5pt;line-height:1.65;font-weight:400;color:var(--dark);
+    margin-bottom:5.5mm;
+  }
+  .speech p b{font-weight:800;}
+  .speech p .en{font-family:'Inter',sans-serif;font-size:.92em;}
+
+  .click{
+    margin-top:auto;align-self:flex-start;
+    font-size:11pt;font-weight:800;color:#fff;background:var(--primary);
+    border-radius:999px;padding:2.2mm 7mm;letter-spacing:.04em;
+  }
+
+  .foot{position:absolute;bottom:8mm;left:16mm;font-family:'Inter',sans-serif;font-size:9pt;color:var(--gray-400);direction:ltr;}
+
+  /* cover */
+  .cover{justify-content:center;align-items:center;text-align:center;}
+  .cover h1{font-size:34pt;font-weight:900;letter-spacing:-1px;}
+  .cover h1 span{color:var(--primary);}
+  .cover .sub{font-size:15pt;color:var(--gray-500);margin-top:6mm;font-weight:300;}
+  .cover .meta{margin-top:12mm;font-size:12.5pt;color:var(--dark-700);line-height:2;}
+
+  /* tips */
+  .tips li{font-size:13.5pt;line-height:1.7;margin-bottom:4mm;list-style:none;display:flex;gap:4mm;}
+  .tips li::before{content:"●";color:var(--primary);font-size:.75em;line-height:2.2;}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="card cover">
+  <h1>Entity<span>Link</span> — כרטיסיות דיבור</h1>
+  <div class="sub">כנס יועצים משפטיים · ניהול ישויות משפטיות בעידן של צמיחה, רגולציה ומורכבות תאגידית</div>
+  <div class="meta">
+    <b>ניל דהאן</b> · סמנכ״ל מוצר · SQLink Group<br>
+    ~6 דקות · 9 שקפים · קליק / חץ שמאלה = שקף הבא · F = מסך מלא
+  </div>
+</section>
+
+<!-- 1 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 1 · פתיחה</div><div class="title">EntityLink</div></div><div class="time">0:00–0:30</div></div>
+  <div class="cue">לעלות על השקף, לתת לרשת להתחבר ברקע 2–3 שניות לפני שמתחילים לדבר.</div>
+  <div class="speech">
+    <p>בוקר טוב לכולם. שאלה קצרה לפני שנתחיל: <b>כמה ישויות משפטיות יש בקבוצה שאתם מלווים?</b> עשר? חמישים? מאתיים?</p>
+    <p>ועכשיו שאלה קשה יותר: אם המנכ״ל היה מבקש מכם, לפגישה של הצהריים, תרשים מעודכן של כל מבנה האחזקות — <b>כמה זמן זה היה לוקח?</b></p>
+    <p>אני ניל דהאן, סמנכ״ל מוצר בקבוצת SQLink. בשש הדקות הקרובות אני רוצה להראות לכם איך EntityLink הופכת את השאלה הזאת <b>לשאלה של שניות.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 1/9</div>
+</section>
+
+<!-- 2 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 2 · האתגר</div><div class="title">המידע קיים — אבל הוא מפוזר</div></div><div class="time">0:30–1:10</div></div>
+  <div class="cue">כרטיסי הכאוס נופלים משמאל — להצביע עליהם בזמן ההקראה.</div>
+  <div class="speech">
+    <p>הבעיה של אף אחד כאן היא לא חוסר במידע — להפך. המידע קיים. <b>הוא פשוט מפוזר:</b></p>
+    <p>רשימת הישויות — באקסל שמישהו עדכן לפני ארבעה חודשים. מסמכי ההתאגדות — קבורים בשרשור מייל. בתיקייה המשותפת — שלוש גרסאות של אותו תקנון. ודדליין רגולטורי שמתגלה יום לפני.</p>
+    <p>כל פיסת מידע לבד נראית בסדר. אבל כשרגולטור שואל שאלה, או כשעסקה נכנסת ל-<span class="en">Due Diligence</span> — מתחילים לרדוף אחרי המידע. <b>ימים שלמים, על מה שהיה צריך לקחת דקות.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 2/9</div>
+</section>
+
+<!-- 3 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 3 · הפתרון</div><div class="title">פלטפורמה אחת לכל הישויות</div></div><div class="time">1:10–1:50</div></div>
+  <div class="cue">שישה כרטיסים קופצים פנימה.</div>
+  <div class="speech">
+    <p>EntityLink היא <b>פלטפורמה אחת</b> שמרכזת את כל הישויות המשפטיות של הארגון — חברות קבוצה, סניפים ונותני שירות — יחד עם המבנה, האנשים, המסמכים והממשל התאגידי.</p>
+    <p>שישה עולמות שעובדים יחד: ניהול ישויות, עץ ארגוני, תהליכי עבודה, מפה גלובלית, ארכיון מסמכים, ודוחות.</p>
+    <p>אבל במקום לספר לכם — אני אראה לכם. <b>ארבעה מסכים אמיתיים מתוך המערכת.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 3/9</div>
+</section>
+
+<!-- 4 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 4 · עץ ארגוני</div><div class="title">כל המבנה במבט אחד</div></div><div class="time">1:50–2:45</div></div>
+  <div class="cue">העץ בונה את עצמו (~3 שניות). לשתוק עד שהרמה השנייה מופיעה — לתת לקהל להסתכל.</div>
+  <div class="speech">
+    <p><b>זה העץ הארגוני. והוא חי.</b></p>
+    <p>תראו איך המבנה נבנה מעצמו: חברת האם למעלה, החברות הבנות מתחתיה, צבועות לפי אזור — צפון אמריקה, אירופה, אסיה, ישראל.</p>
+    <p>כל כרטיס כאן הוא ישות אמיתית: מדינה, מספר <span class="en">SAP</span>, ומי מחזיק בה — עם אחוזי ההחזקה המדויקים, עד שתי ספרות אחרי הנקודה.</p>
+    <p>אפשר לסנן, לחזור לכל נקודת זמן בעבר, ולייצא <span class="en">PDF</span> מוכן לדירקטוריון. במקום לצייר את זה מחדש כל רבעון ב-<span class="en">PowerPoint</span> — <b>זה פשוט תמיד מעודכן.</b></p>
+    <p>ולחיצה על כל ישות פותחת את הפרופיל המלא שלה. בואו ניכנס.</p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 4/9</div>
+</section>
+
+<!-- 5 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 5 · ניהול ישויות</div><div class="title">כל ישות — פרופיל מלא</div></div><div class="time">2:45–3:30</div></div>
+  <div class="cue">מסך אמיתי מהמערכת נכנס + שני תגים צפים.</div>
+  <div class="speech">
+    <p>זו רשימת הישויות המלאה — חברות קבוצה, סניפים וספקי שירות, בכל המדינות, ברשימה אחת שאפשר לסנן ולחתוך איך שרוצים.</p>
+    <p>לכל ישות פרופיל מלא: <b>נושאי משרה ומורשי חתימה</b>, נתוני רישום ומס, כתובות וסטטוס.</p>
+    <p><b>יותר מחמש מאות ישויות</b> מנוהלות ככה היום במערכת. והכול מקושר — מהרשימה לעץ, מהעץ לפרופיל, ומהפרופיל למסמכים.</p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 5/9</div>
+</section>
+
+<!-- 6 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 6 · בעלי מניות</div><div class="title">כל טרנזקציה מתועדת</div></div><div class="time">3:30–4:20</div></div>
+  <div class="cue">להתחיל לדבר מיד; הטרנזקציה רצה לבד אחרי ~3 שניות — לתזמן את ״תסתכלו״ אליה.</div>
+  <div class="speech">
+    <p>ובתוך כל ישות — המודול שהקהל הזה יעריך במיוחד: <b>בעלי המניות.</b></p>
+    <p>כל ה-<span class="en">Cap Table</span> במקום אחד: מי מחזיק, כמה, איזה סוג מניות, ומה זכויות ההצבעה.</p>
+    <p><b>ועכשיו תסתכלו מה קורה כשמתבצעת טרנזקציה</b> — העברה של עשרים אחוז למשקיע חדש: האחוזים מתעדכנים לבד, בעל המניות החדש נכנס לטבלה, העוגה נחתכת מחדש — והטרנזקציה נרשמת ביומן, עם המסמכים מצורפים.</p>
+    <p>שום דבר לא הולך לאיבוד. <span class="en">Due Diligence</span>? סכסוך בעלי מניות? שרשרת ההעברות המלאה — כולל מי החזיק מה בכל תאריך בעבר — <b>זמינה בשניות.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 6/9</div>
+</section>
+
+<!-- 7 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 7 · ארכיון תאגידי</div><div class="title">כל מסמך במקומו</div></div><div class="time">4:20–5:00</div></div>
+  <div class="cue">המסמכים עפים לתיקיות בזמן שמדברים — להצביע על המסך ב״תראו״.</div>
+  <div class="speech">
+    <p>וכל זה נשען על <b>הארכיון התאגידי.</b></p>
+    <p>תיקיות בסטנדרט שכל אחד כאן מכיר: מסמכי יסוד, אסיפות כלליות, החלטות דירקטוריון, הסכמי נושאי משרה, ייפויי כוח.</p>
+    <p><b>תראו</b> — כל מסמך שנכנס למערכת מתויק אוטומטית למקום שלו: גם מסמכי הארגון וגם המסמכים של האנשים. עם קטגוריה, תאריך, בקרת גרסאות והרשאות.</p>
+    <p>ביקורת מחר בבוקר? במקום שבועות של איסוף — <b>הכול כבר מתויק, מסונן, וזמין בלחיצה.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 7/9</div>
+</section>
+
+<!-- 8 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 8 · סיכום</div><div class="title">ממידע מפוזר — לשליטה אחת</div></div><div class="time">5:00–5:40</div></div>
+  <div class="cue">המספרים נספרים לבד — לחכות שנייה עד שמסיימים לרוץ.</div>
+  <div class="speech">
+    <p>אז בשורה התחתונה.</p>
+    <p>במקום אקסלים, מיילים ו״ידיים על הלב״ — <b>שליטה אחת:</b> יותר מחמש מאות ישויות, ביותר מחמישים מדינות, עם מאה אחוז מעקב ותיעוד.</p>
+    <p><b>EntityLink — נהלו כל ישות, מעבר לכל גבול.</b></p>
+  </div>
+  <div class="click">קליק ←</div>
+  <div class="foot">EntityLink · Cue Cards · 8/9</div>
+</section>
+
+<!-- 9 -->
+<section class="card">
+  <div class="head"><div><div class="num">כרטיסייה 9 · תודה</div><div class="title">תודה רבה</div></div><div class="time">5:40+</div></div>
+  <div class="cue">להשאיר את השקף על המסך בזמן השאלות.</div>
+  <div class="speech">
+    <p>תודה רבה שהקשבתם.</p>
+    <p>אני אשמח להראות לכם <b>דמו חי</b> של המערכת — תתפסו אותי אחרי ההרצאה, או תשלחו לי מייל.</p>
+    <p>תודה!</p>
+  </div>
+  <div class="foot">EntityLink · Cue Cards · 9/9</div>
+</section>
+
+<!-- TIPS -->
+<section class="card">
+  <div class="head"><div><div class="num">נספח</div><div class="title">טיפים</div></div><div class="time"></div></div>
+  <ul class="tips">
+    <li><b>F</b> = מסך מלא לפני שמתחילים. קליק או חץ שמאלה = שקף הבא, חץ ימינה = חזרה.</li>
+    <li>האנימציות רצות לבד עם הכניסה לשקף — אין ״קליקים פנימיים״. אפשר לדבר בזמן שהן רצות.</li>
+    <li>שקפים 4 ו-6 הם שיאי ה״וואו״ — שם להאט ולתת למסך לעבוד.</li>
+    <li>אם יש זמן ומסך — דמו חי של העץ הארגוני אחרי שקף 4 או בסוף.</li>
+    <li>קישור למצגת: <span style="font-family:'Inter',sans-serif;direction:ltr;unicode-bidi:embed;">neildsqlink.github.io/entitylink-presentation</span></li>
+  </ul>
+  <div class="foot">EntityLink · Cue Cards</div>
+</section>
+
+</body>
+</html>
