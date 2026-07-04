@@ -7,8 +7,9 @@
 <style>
   :root{
     --primary:#E8612D; --primary-dark:#c94f1f;
-    --dark:#0f172a; --dark-700:#334155;
-    --gray-200:#e2e8f0; --gray-400:#94a3b8; --gray-500:#64748b;
+    --dark:#1e293b; --dark-700:#475569;
+    --gray-200:#e8edf3; --gray-400:#94a3b8; --gray-500:#64748b;
+    --soft:#fff8f4;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Heebo',sans-serif;color:var(--dark);-webkit-print-color-adjust:exact;print-color-adjust:exact;}
@@ -16,72 +17,78 @@
   .card{
     page-break-after:always;
     min-height:100vh;
-    padding:14mm 16mm 12mm;
+    padding:16mm 18mm 14mm;
     display:flex;flex-direction:column;
     position:relative;
   }
   .card:last-child{page-break-after:auto;}
 
-  .head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:3px solid var(--primary);padding-bottom:5mm;margin-bottom:7mm;}
-  .num{font-size:13pt;font-weight:700;color:var(--primary);letter-spacing:.06em;}
-  .title{font-size:23pt;font-weight:900;letter-spacing:-.5px;}
-  .time{font-family:'Inter',sans-serif;font-size:12pt;font-weight:700;color:var(--gray-500);font-variant-numeric:tabular-nums;direction:ltr;}
+  .head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4mm;}
+  .num{font-size:12pt;font-weight:600;color:var(--primary);letter-spacing:.02em;}
+  .title{font-size:21pt;font-weight:800;letter-spacing:-.5px;margin-top:1mm;}
+  .time{font-family:'Inter',sans-serif;font-size:11pt;font-weight:600;color:var(--gray-400);font-variant-numeric:tabular-nums;direction:ltr;}
+  .rule{height:2px;background:linear-gradient(90deg,var(--primary),#ffb488);border-radius:2px;margin-bottom:7mm;opacity:.9;}
 
   .cue{
-    background:rgba(232,97,45,.07);border:1px solid rgba(232,97,45,.3);border-radius:10px;
-    padding:3.5mm 5mm;margin-bottom:6mm;
-    font-size:11.5pt;font-weight:600;color:var(--primary-dark);
+    background:var(--soft);border-radius:10px;
+    padding:3mm 5mm;margin-bottom:7mm;
+    font-size:11pt;font-weight:500;color:var(--primary-dark);
   }
-  .cue::before{content:"🎬 ";}
+  .cue::before{content:"🎬  ";}
 
   .speech p{
-    font-size:15.5pt;line-height:1.65;font-weight:400;color:var(--dark);
-    margin-bottom:5.5mm;
+    font-size:15.5pt;line-height:1.8;font-weight:400;color:var(--dark);
+    margin-bottom:5mm;
   }
-  .speech p b{font-weight:800;}
+  .speech p b{font-weight:700;color:var(--dark);}
   .speech p .en{font-family:'Inter',sans-serif;font-size:.92em;}
+  .speech .q{font-size:16.5pt;font-weight:600;color:var(--dark);}
 
   .click{
     margin-top:auto;align-self:flex-start;
-    font-size:11pt;font-weight:800;color:#fff;background:var(--primary);
-    border-radius:999px;padding:2.2mm 7mm;letter-spacing:.04em;
+    font-size:10.5pt;font-weight:700;color:var(--primary);
+    background:var(--soft);border-radius:999px;padding:2mm 6mm;
   }
-
-  .foot{position:absolute;bottom:8mm;left:16mm;font-family:'Inter',sans-serif;font-size:9pt;color:var(--gray-400);direction:ltr;}
+  .foot{position:absolute;bottom:9mm;left:18mm;font-family:'Inter',sans-serif;font-size:8.5pt;color:var(--gray-400);direction:ltr;}
 
   /* cover */
   .cover{justify-content:center;align-items:center;text-align:center;}
-  .cover h1{font-size:34pt;font-weight:900;letter-spacing:-1px;}
+  .cover h1{font-size:33pt;font-weight:900;letter-spacing:-1px;}
   .cover h1 span{color:var(--primary);}
-  .cover .sub{font-size:15pt;color:var(--gray-500);margin-top:6mm;font-weight:300;}
-  .cover .meta{margin-top:12mm;font-size:12.5pt;color:var(--dark-700);line-height:2;}
+  .cover .sub{font-size:14pt;color:var(--gray-500);margin-top:6mm;font-weight:300;line-height:1.6;max-width:150mm;}
+  .cover .meta{margin-top:14mm;font-size:12pt;color:var(--dark-700);line-height:2;}
+  .cover .dot{color:var(--gray-400);}
 
   /* tips */
   .tips li{font-size:13.5pt;line-height:1.7;margin-bottom:4mm;list-style:none;display:flex;gap:4mm;}
-  .tips li::before{content:"●";color:var(--primary);font-size:.75em;line-height:2.2;}
+  .tips li::before{content:"●";color:var(--primary);font-size:.7em;line-height:2.4;}
 </style>
 </head>
 <body>
 
 <!-- COVER -->
 <section class="card cover">
-  <h1>Entity<span>Link</span> — כרטיסיות דיבור</h1>
-  <div class="sub">כנס יועצים משפטיים · ניהול ישויות משפטיות בעידן של צמיחה, רגולציה ומורכבות תאגידית</div>
+  <h1>Entity<span>Link</span></h1>
+  <div class="sub">כרטיסיות דיבור · כנס יועצים משפטיים<br>ניהול ישויות משפטיות בעידן של צמיחה, רגולציה ומורכבות תאגידית</div>
   <div class="meta">
-    <b>ניל דהאן</b> · סמנכ״ל מוצר · SQLink Group<br>
-    ~6 דקות · 9 שקפים · קליק / חץ שמאלה = שקף הבא · F = מסך מלא
+    <b>ניל דהאן</b> <span class="dot">·</span> סמנכ״ל מוצר <span class="dot">·</span> SQLink Group<br>
+    ~6 דקות <span class="dot">·</span> 9 שקפים <span class="dot">·</span> קליק / חץ שמאלה = שקף הבא <span class="dot">·</span> F = מסך מלא
   </div>
 </section>
 
 <!-- 1 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 1 · פתיחה</div><div class="title">EntityLink</div></div><div class="time">0:00–0:30</div></div>
-  <div class="cue">לעלות על השקף, לתת לרשת להתחבר ברקע 2–3 שניות לפני שמתחילים לדבר.</div>
+  <div class="head"><div><div class="num">כרטיסייה 1 · פתיחה</div><div class="title">EntityLink</div></div><div class="time">0:00–0:35</div></div>
+  <div class="rule"></div>
+  <div class="cue">לתת לרשת ברקע להתחבר 2–3 שניות, לחייך, ואז להתחיל בנחת.</div>
   <div class="speech">
-    <p>בוקר טוב לכולם. אני רוצה להתחיל ברגע שכל מי שמלווה חברות מכיר: <b>מבקשים מכם תרשים מעודכן של מבנה האחזקות</b> — לדירקטוריון, לבנק, לרגולטור.</p>
-    <p>ואיפה זה מתחיל? באקסל. בשרשור מייל. בגרסה של המצגת משנה שעברה.</p>
-    <p>ולא משנה אם מדובר בחמש חברות או בחמש מאות — זו אותה בעיה: <b>המידע התאגידי חי בכל מקום, חוץ ממקום אחד מסודר.</b></p>
-    <p>אני ניל דהאן, סמנכ״ל מוצר בקבוצת SQLink. בשש הדקות הקרובות אני אראה לכם איך EntityLink הופכת את כל זה לתמונה אחת — <b>חיה, מעודכנת, וזמינה בשניות.</b></p>
+    <p>בוקר טוב. תודה שאתם כאן.</p>
+    <p>אני רוצה לפתוח בשלוש שאלות קטנות:</p>
+    <p class="q">כמה זמן ייקח לכם למצוא הסכם שנחתם לפני שנתיים?</p>
+    <p class="q">להוציא את מבנה האחזקות של הקבוצה, מעודכן להיום?</p>
+    <p class="q">ואיך הוא נראה — לפני שנתיים?</p>
+    <p>אם חייכתם עכשיו במבוכה — <b>אתם במקום הנכון.</b></p>
+    <p>קוראים לי ניל דהאן, ובשש הדקות הקרובות אני אראה לכם איך כל זה הופך לשאלה של שניות.</p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 1/9</div>
@@ -89,12 +96,14 @@
 
 <!-- 2 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 2 · האתגר</div><div class="title">המידע קיים — אבל הוא מפוזר</div></div><div class="time">0:30–1:10</div></div>
-  <div class="cue">כרטיסי הכאוס נופלים משמאל — להצביע עליהם בזמן ההקראה.</div>
+  <div class="head"><div><div class="num">כרטיסייה 2 · האתגר</div><div class="title">המידע קיים — הוא פשוט מפוזר</div></div><div class="time">0:35–1:15</div></div>
+  <div class="rule"></div>
+  <div class="cue">כרטיסי הכאוס נופלים משמאל — אפשר להצביע עליהם בחיוך.</div>
   <div class="speech">
-    <p>הבעיה של אף אחד כאן היא לא חוסר במידע — להפך. המידע קיים. <b>הוא פשוט מפוזר:</b></p>
-    <p>רשימת הישויות — באקסל שמישהו עדכן לפני ארבעה חודשים. מסמכי ההתאגדות — קבורים בשרשור מייל. בתיקייה המשותפת — שלוש גרסאות של אותו תקנון. ודדליין רגולטורי שמתגלה יום לפני.</p>
-    <p>כל פיסת מידע לבד נראית בסדר. אבל כשרגולטור שואל שאלה, או כשעסקה נכנסת ל-<span class="en">Due Diligence</span> — מתחילים לרדוף אחרי המידע. <b>ימים שלמים, על מה שהיה צריך לקחת דקות.</b></p>
+    <p>אז מה הבעיה? <b>זו אף פעם לא בעיה של מידע חסר.</b> המידע קיים.</p>
+    <p>הוא פשוט מפוזר — אקסל אחד, שרשור מייל, וגרסה ישנה בתיקייה משותפת.</p>
+    <p>וברגע שמגיעה שאלה מרגולטור, או שהדירקטוריון מבקש תשובה — מתחילים לחפש.</p>
+    <p><b>ימים שלמים, על משהו שהיה צריך לקחת דקות.</b></p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 2/9</div>
@@ -102,12 +111,14 @@
 
 <!-- 3 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 3 · הפתרון</div><div class="title">פלטפורמה אחת לכל הישויות</div></div><div class="time">1:10–1:50</div></div>
+  <div class="head"><div><div class="num">כרטיסייה 3 · הפתרון</div><div class="title">הכול במקום אחד</div></div><div class="time">1:15–1:55</div></div>
+  <div class="rule"></div>
   <div class="cue">שישה כרטיסים קופצים פנימה.</div>
   <div class="speech">
-    <p>EntityLink היא <b>פלטפורמה אחת</b> שמרכזת את כל הישויות המשפטיות של הארגון — חברות קבוצה, סניפים ונותני שירות — יחד עם המבנה, האנשים, המסמכים והממשל התאגידי.</p>
-    <p>שישה עולמות שעובדים יחד: ניהול ישויות, עץ ארגוני, תהליכי עבודה, מפה גלובלית, ארכיון מסמכים, ודוחות.</p>
-    <p>אבל במקום לספר לכם — אני אראה לכם. <b>ארבעה מסכים אמיתיים מתוך המערכת.</b></p>
+    <p>אז בואו נדבר על הפתרון.</p>
+    <p>EntityLink מרכזת את כל הישויות של הארגון <b>במקום אחד</b> — החברות, המבנה, האנשים והמסמכים.</p>
+    <p>שישה עולמות שעובדים יחד.</p>
+    <p>ובמקום לספר לכם — אני פשוט אראה. <b>ארבעה מסכים אמיתיים מהמערכת.</b></p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 3/9</div>
@@ -115,14 +126,16 @@
 
 <!-- 4 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 4 · עץ ארגוני</div><div class="title">כל המבנה במבט אחד</div></div><div class="time">1:50–2:45</div></div>
-  <div class="cue">העץ בונה את עצמו (~3 שניות). לשתוק עד שהרמה השנייה מופיעה — לתת לקהל להסתכל.</div>
+  <div class="head"><div><div class="num">כרטיסייה 4 · עץ ארגוני</div><div class="title">כל המבנה במבט אחד</div></div><div class="time">1:55–2:45</div></div>
+  <div class="rule"></div>
+  <div class="cue">העץ בונה את עצמו (~3 שניות) — לתת לו רגע, לא לדבר מעליו.</div>
   <div class="speech">
-    <p><b>זה העץ הארגוני. והוא חי.</b></p>
-    <p>תראו איך המבנה נבנה מעצמו: חברת האם למעלה, החברות הבנות מתחתיה, צבועות לפי אזור.</p>
-    <p>כל כרטיס כאן הוא ישות אמיתית: מדינה, נתוני רישום, ומי מחזיק בה — עם אחוזי ההחזקה המדויקים, עד שתי ספרות אחרי הנקודה.</p>
-    <p>אפשר לסנן, לחזור לכל נקודת זמן בעבר, ולייצא <span class="en">PDF</span> מוכן לדירקטוריון. במקום לצייר את זה מחדש כל רבעון ב-<span class="en">PowerPoint</span> — <b>זה פשוט תמיד מעודכן.</b></p>
-    <p>ולחיצה על כל ישות פותחת את הפרופיל המלא שלה. בואו ניכנס.</p>
+    <p>נתחיל מהתמונה הגדולה: <b>העץ הארגוני.</b></p>
+    <p>תראו איך הוא נבנה מעצמו — חברת האם, החברות הבנות, צבועות לפי אזור.</p>
+    <p>כל כרטיס הוא ישות אמיתית: מדינה, נתוני רישום, ומי מחזיק בה — עם האחוזים המדויקים.</p>
+    <p>אפשר לסנן, לחזור אחורה בזמן, ולייצא <span class="en">PDF</span> מוכן לדירקטוריון.</p>
+    <p>במקום לצייר את זה מחדש כל רבעון — <b>זה פשוט תמיד מעודכן.</b></p>
+    <p>ולחיצה על כל ישות פותחת את הפרופיל שלה. בואו ניכנס.</p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 4/9</div>
@@ -131,11 +144,12 @@
 <!-- 5 -->
 <section class="card">
   <div class="head"><div><div class="num">כרטיסייה 5 · ניהול ישויות</div><div class="title">כל ישות — פרופיל מלא</div></div><div class="time">2:45–3:30</div></div>
+  <div class="rule"></div>
   <div class="cue">מסך אמיתי מהמערכת נכנס + שני תגים צפים.</div>
   <div class="speech">
-    <p>זו רשימת הישויות המלאה — חברות קבוצה, סניפים וספקי שירות, בכל המדינות, ברשימה אחת שאפשר לסנן ולחתוך איך שרוצים.</p>
-    <p>לכל ישות פרופיל מלא: <b>נושאי משרה ומורשי חתימה</b>, נתוני רישום ומס, כתובות וסטטוס.</p>
-    <p>והכול מקושר — מהרשימה לעץ, מהעץ לפרופיל, ומהפרופיל למסמכים. <b>מקור אמת אחד, לכל הישויות.</b></p>
+    <p>זו רשימת כל הישויות — חברות, סניפים וספקי שירות, במקום אחד.</p>
+    <p>לכל אחת פרופיל מלא: <b>נושאי משרה, מורשי חתימה,</b> נתוני רישום וסטטוס.</p>
+    <p>והכי חשוב — הכול מקושר. מהרשימה לעץ, מהעץ לפרופיל, ומהפרופיל למסמכים.</p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 5/9</div>
@@ -144,12 +158,13 @@
 <!-- 6 -->
 <section class="card">
   <div class="head"><div><div class="num">כרטיסייה 6 · בעלי מניות</div><div class="title">כל טרנזקציה מתועדת</div></div><div class="time">3:30–4:20</div></div>
-  <div class="cue">להתחיל לדבר מיד; הטרנזקציה רצה לבד אחרי ~3 שניות — לתזמן את ״תסתכלו״ אליה.</div>
+  <div class="rule"></div>
+  <div class="cue">הטרנזקציה רצה לבד אחרי ~3 שניות — לתזמן את ״תראו״ אליה.</div>
   <div class="speech">
-    <p>ובתוך כל ישות — המודול שהקהל הזה יעריך במיוחד: <b>בעלי המניות.</b></p>
-    <p>כל תמונת הבעלות במקום אחד: מי מחזיק, כמה, איזה סוג מניות, ומה זכויות ההצבעה.</p>
-    <p><b>ועכשיו תסתכלו מה קורה כשמתבצעת טרנזקציה</b> — העברה של עשרים אחוז למשקיע חדש: האחוזים מתעדכנים לבד, בעל המניות החדש נכנס לטבלה, העוגה נחתכת מחדש — והטרנזקציה נרשמת ביומן, עם המסמכים מצורפים.</p>
-    <p>שום דבר לא הולך לאיבוד. <span class="en">Due Diligence</span>? סכסוך בעלי מניות? שרשרת ההעברות המלאה — כולל מי החזיק מה בכל תאריך בעבר — <b>זמינה בשניות.</b></p>
+    <p>ובתוך כל ישות — <b>מי מחזיק בה.</b></p>
+    <p>כל תמונת הבעלות: מי, כמה, איזה סוג מניות, ומה זכויות ההצבעה.</p>
+    <p><b>ותראו מה קורה כשמתבצעת טרנזקציה</b> — העברה של עשרים אחוז: האחוזים מתעדכנים לבד, בעל מניות חדש נכנס, והכול נרשם עם המסמכים.</p>
+    <p>צריך להוכיח מי החזיק במה, ומתי? <b>זה שם. בשניות.</b></p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 6/9</div>
@@ -157,13 +172,14 @@
 
 <!-- 7 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 7 · ארכיון תאגידי</div><div class="title">כל מסמך במקומו</div></div><div class="time">4:20–5:00</div></div>
-  <div class="cue">המסמכים עפים לתיקיות בזמן שמדברים — להצביע על המסך ב״תראו״.</div>
+  <div class="head"><div><div class="num">כרטיסייה 7 · ארכיון</div><div class="title">כל מסמך במקומו</div></div><div class="time">4:20–5:00</div></div>
+  <div class="rule"></div>
+  <div class="cue">המסמכים עפים לתיקיות בזמן שמדברים — להצביע ב״תראו״.</div>
   <div class="speech">
-    <p>וכל זה נשען על <b>הארכיון התאגידי.</b></p>
-    <p>תיקיות בסטנדרט שכל אחד כאן מכיר: מסמכי יסוד, אסיפות כלליות, החלטות דירקטוריון, הסכמי נושאי משרה, ייפויי כוח.</p>
-    <p><b>תראו</b> — כל מסמך שנכנס למערכת מתויק אוטומטית למקום שלו: גם מסמכי הארגון וגם המסמכים של האנשים. עם קטגוריה, תאריך, בקרת גרסאות והרשאות.</p>
-    <p>ביקורת מחר בבוקר? במקום שבועות של איסוף — <b>הכול כבר מתויק, מסונן, וזמין בלחיצה.</b></p>
+    <p>וכל המסמכים? יושבים ב<b>ארכיון מסודר.</b></p>
+    <p>תיקיות שכל אחד כאן מכיר — מסמכי יסוד, אסיפות, החלטות דירקטוריון, ייפויי כוח.</p>
+    <p>תראו — כל מסמך שנכנס מתויק אוטומטית למקום שלו.</p>
+    <p>ביקורת מחר בבוקר? במקום שבועות של איסוף — <b>הכול כבר מסודר, וזמין בלחיצה.</b></p>
   </div>
   <div class="click">קליק ←</div>
   <div class="foot">EntityLink · Cue Cards · 7/9</div>
@@ -171,11 +187,13 @@
 
 <!-- 8 -->
 <section class="card">
-  <div class="head"><div><div class="num">כרטיסייה 8 · סיכום</div><div class="title">ממידע מפוזר — לשליטה אחת</div></div><div class="time">5:00–5:40</div></div>
+  <div class="head"><div><div class="num">כרטיסייה 8 · סיכום</div><div class="title">ממידע מפוזר — למקום אחד</div></div><div class="time">5:00–5:40</div></div>
+  <div class="rule"></div>
   <div class="cue">המספרים נספרים לבד — לחכות שנייה עד שמסיימים לרוץ.</div>
   <div class="speech">
     <p>אז בשורה התחתונה.</p>
-    <p>במקום אקסלים ומיילים — <b>מקור אמת אחד:</b> כל הישויות, בכל מדינה שתפעלו בה, עם מאה אחוז תיעוד ומעקב.</p>
+    <p>במקום אקסלים ומיילים — <b>מקום אחד. מקור אמת אחד.</b></p>
+    <p>כל הישויות, בכל מדינה, עם תיעוד מלא.</p>
     <p><b>EntityLink — נהלו כל ישות, מעבר לכל גבול.</b></p>
   </div>
   <div class="click">קליק ←</div>
@@ -185,10 +203,11 @@
 <!-- 9 -->
 <section class="card">
   <div class="head"><div><div class="num">כרטיסייה 9 · תודה</div><div class="title">תודה רבה</div></div><div class="time">5:40+</div></div>
-  <div class="cue">להשאיר את השקף על המסך בזמן השאלות.</div>
+  <div class="rule"></div>
+  <div class="cue">להשאיר את השקף על המסך בזמן השאלות. לחייך. סיימת 🙂</div>
   <div class="speech">
     <p>תודה רבה שהקשבתם.</p>
-    <p>אני אשמח להראות לכם <b>דמו חי</b> של המערכת — תתפסו אותי אחרי ההרצאה, או תשלחו לי מייל.</p>
+    <p>אשמח להראות לכם <b>דמו חי</b> של המערכת — תתפסו אותי אחרי, או שלחו לי מייל.</p>
     <p>תודה!</p>
   </div>
   <div class="foot">EntityLink · Cue Cards · 9/9</div>
@@ -196,12 +215,13 @@
 
 <!-- TIPS -->
 <section class="card">
-  <div class="head"><div><div class="num">נספח</div><div class="title">טיפים</div></div><div class="time"></div></div>
+  <div class="head"><div><div class="num">נספח</div><div class="title">טיפים קטנים</div></div><div class="time"></div></div>
+  <div class="rule"></div>
   <ul class="tips">
-    <li><b>F</b> = מסך מלא לפני שמתחילים. קליק או חץ שמאלה = שקף הבא, חץ ימינה = חזרה.</li>
+    <li><b>F</b> = מסך מלא לפני שמתחילים. קליק או חץ שמאלה = קדימה, חץ ימינה = אחורה.</li>
     <li>האנימציות רצות לבד עם הכניסה לשקף — אין ״קליקים פנימיים״. אפשר לדבר בזמן שהן רצות.</li>
-    <li>שקפים 4 ו-6 הם שיאי ה״וואו״ — שם להאט ולתת למסך לעבוד.</li>
-    <li>אם יש זמן ומסך — דמו חי של העץ הארגוני אחרי שקף 4 או בסוף.</li>
+    <li>שקפים 4 ו-6 הם הרגעים הכי יפים — שם כדאי להאט ולתת למסך לעבוד.</li>
+    <li>נשמו. משפט קצר, נשימה, משפט קצר. אתם מכירים את החומר טוב יותר מכולם באולם.</li>
     <li>קישור למצגת: <span style="font-family:'Inter',sans-serif;direction:ltr;unicode-bidi:embed;">neildsqlink.github.io/entitylink-presentation</span></li>
   </ul>
   <div class="foot">EntityLink · Cue Cards</div>
