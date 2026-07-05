@@ -29,8 +29,6 @@ const B = {
 
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-const TIMES = ["0:00–0:30", "0:30–1:10", "1:10–1:50", "1:50–2:45", "2:45–3:30", "3:30–4:20", "4:20–5:00", "5:00–5:40", "דמו + שאלות"];
-
 /* ─── Hooks ─── */
 function useCountUp(active, target, { duration = 1400, delay = 0 } = {}) {
   const [val, setVal] = useState(0);
@@ -1780,7 +1778,7 @@ export default function Presentation() {
         Entity<span style={{ color: B.primary }}>Link</span>
       </div>
       <div style={{ position: "fixed", bottom: 20, left: 30, zIndex: 100, fontSize: 13, color: B.gray400, fontVariantNumeric: "tabular-nums" }} dir="ltr">
-        {TIMES[current]} · {current + 1} / {SLIDE_COMPONENTS.length}
+        {current + 1} / {SLIDE_COMPONENTS.length}
       </div>
     </div>
   );
