@@ -963,7 +963,131 @@ function OrgTreeSlide({ active }) {
 
 /* ══════════════════ SLIDE 5 — ENTITY MANAGEMENT ══════════════════ */
 
+const ENTITY_FIELDS = [
+  ["Name In Local Language", "נורת׳וייל ישראל בע״מ", true],
+  ["Entity's Form", "Private Company Ltd."],
+  ["Doing Business As", "Northvale Israel"],
+  ["Tax ID", "514489237"],
+  ["Main Shareholder", "Northvale Holdings"],
+  ["Date of Incorporation", "03 Sep 2014"],
+  ["Government Agency Of Reg.", "Registrar of Companies"],
+  ["Date of Acquisition", "12 Mar 2019"],
+  ["Sub Group", "EMEA · Israel"],
+  ["Secondary Status", "Trading"],
+  ["Abbr", "NVIL"],
+  ["Link to Registrar Extract", "View"],
+];
+
+function EntityOverviewPanel({ shown }) {
+  const label = { fontSize: 8.5, color: B.gray400, marginBottom: 2, letterSpacing: 0.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" };
+  const val = { fontSize: 11, fontWeight: 600, color: B.dark, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" };
+  const navItems = ["Overview", "Addresses", "Appointments", "Subsidiaries & Branches", "Shareholders"];
+  const idCard = [["Entity Type", "Group Company"], ["#SAP", "12345"], ["Country", "🇮🇱 Israel"], ["Registered Number", "514489237"]];
+  return (
+    <div
+      dir="ltr"
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: B.white,
+        display: "grid",
+        gridTemplateColumns: "34% 1fr",
+        fontFamily: `'${B.fontEn}', sans-serif`,
+        textAlign: "left",
+        lineHeight: 1.35,
+        overflow: "hidden",
+        opacity: shown ? 1 : 0,
+        transform: shown ? "scale(1)" : "scale(0.96)",
+        transition: `all 0.85s ${EASE}`,
+      }}
+    >
+      {/* sidebar */}
+      <div style={{ background: B.gray100, borderRight: `1px solid ${B.gray200}`, padding: "12px 12px 8px", display: "flex", flexDirection: "column", gap: 6 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, color: B.gray500, fontSize: 10, fontWeight: 600 }}>
+          <FlatIcon name="globe" size={12} color={B.gray500} /> Legal Entities
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 9.5, color: "#059669", fontWeight: 600 }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} /> Active
+        </div>
+        <div style={{ fontSize: 13, fontWeight: 800, color: B.dark, marginBottom: 2 }}>Northvale Israel Ltd.</div>
+        <div style={{ background: B.white, border: `1px solid ${B.gray200}`, borderRadius: 8, padding: "8px 9px", display: "flex", flexDirection: "column", gap: 6 }}>
+          {idCard.map(([k, v], i) => (
+            <div key={i}>
+              <div style={label}>{k}</div>
+              <div style={{ ...val, fontSize: 10.5 }}>{v}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 1, marginTop: 4 }}>
+          {navItems.map((n, i) => (
+            <div key={i} style={{ fontSize: 10, fontWeight: i === 0 ? 700 : 500, color: i === 0 ? B.primary : B.gray500, background: i === 0 ? "rgba(232,97,45,0.1)" : "transparent", borderRadius: 6, padding: "4px 7px" }}>
+              {n}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* main */}
+      <div style={{ padding: "11px 15px", display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 3 }}>
+          <div style={{ fontSize: 9, color: B.gray400 }}>Home / Legal Entities / <span style={{ color: B.gray500 }}>Northvale Israel Ltd.</span> / <span style={{ color: B.dark, fontWeight: 600 }}>Overview</span></div>
+          <div style={{ background: B.primary, color: B.white, fontSize: 9.5, fontWeight: 600, padding: "3px 11px", borderRadius: 999, display: "flex", alignItems: "center", gap: 4 }}>
+            <FlatIcon name="pencil" size={10} color={B.white} /> Edit
+          </div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 15, fontWeight: 800, color: B.dark, marginBottom: 11 }}>
+          <FlatIcon name="globe" size={15} color={B.primary} /> Overview
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", rowGap: 11, columnGap: 14, background: B.white, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "13px 15px" }}>
+          {ENTITY_FIELDS.map(([k, v, rtl], i) => (
+            <div key={i}>
+              <div style={label}>{k}</div>
+              <div dir={rtl ? "rtl" : "ltr"} style={{ ...val, color: v === "View" ? B.primary : B.dark }}>{v}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* compliance + directors strip */}
+        <div style={{ display: "flex", gap: 10, marginTop: 11, alignItems: "stretch" }}>
+          <div style={{ flex: 1.6, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "9px 12px" }}>
+            <div style={{ fontSize: 8.5, fontWeight: 700, color: B.gray400, letterSpacing: 0.4, marginBottom: 6 }}>COMPLIANCE</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 10, color: B.dark700, marginBottom: 5 }}>
+              <FlatIcon name="check" size={12} color="#059669" /> Annual Report 2025
+              <span style={{ marginLeft: "auto", fontSize: 8.5, fontWeight: 700, color: "#059669", background: "rgba(16,185,129,0.12)", borderRadius: 999, padding: "2px 7px" }}>Filed</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 10, color: B.dark700 }}>
+              <FlatIcon name="clock" size={12} color={B.primary} /> Board Meeting Q3
+              <span style={{ marginLeft: "auto", fontSize: 8.5, fontWeight: 700, color: B.primaryDark, background: "rgba(232,97,45,0.12)", borderRadius: 999, padding: "2px 7px" }}>30 Sep</span>
+            </div>
+          </div>
+          <div style={{ flex: 1, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "9px 12px" }}>
+            <div style={{ fontSize: 8.5, fontWeight: 700, color: B.gray400, letterSpacing: 0.4, marginBottom: 7 }}>DIRECTORS</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {[["ד.ל", "Dana Levy", "#5877E6"], ["א.כ", "Avi Cohen", "#16A34A"]].map(([ini, nm, bg], i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                  <span style={{ width: 18, height: 18, borderRadius: "50%", background: bg, color: B.white, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 8 }}>{ini}</span>
+                  <span style={{ fontSize: 10, fontWeight: 600, color: B.dark }}>{nm}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function EntitiesSlide({ active }) {
+  const [entered, setEntered] = useState(false);
+  useEffect(() => {
+    if (!active) {
+      setEntered(false);
+      return;
+    }
+    const t = setTimeout(() => setEntered(true), 2600);
+    return () => clearTimeout(t);
+  }, [active]);
   return (
     <SlideWrap active={active}>
       <GridBackdrop />
@@ -1003,12 +1127,54 @@ function EntitiesSlide({ active }) {
         </div>
 
         <div style={{ position: "relative" }}>
-          <MacWindow active={active} title="EntityLink — Legal Entities" src={A("/screenshots/01-legal-entities.png")} delay={450} />
-          <Callout active={active} delay={1500} color={B.na} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
+          {/* browser window that drills from the list into a single entity */}
+          <div
+            dir="ltr"
+            style={{
+              background: B.white,
+              border: `1px solid ${B.gray200}`,
+              borderRadius: 16,
+              boxShadow: "0 30px 70px rgba(15,23,42,0.16), 0 6px 18px rgba(15,23,42,0.06)",
+              overflow: "hidden",
+              opacity: active ? 1 : 0,
+              transform: active
+                ? "perspective(1400px) rotateX(0deg) translateY(0) scale(1)"
+                : "perspective(1400px) rotateX(10deg) translateY(46px) scale(0.94)",
+              transition: `all 1s ${EASE} 450ms`,
+              position: "relative",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: B.gray100, borderBottom: `1px solid ${B.gray200}` }}>
+              <div style={{ display: "flex", gap: 6 }}>
+                {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+                  <span key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c }} />
+                ))}
+              </div>
+              <span style={{ fontFamily: `'${B.fontEn}', sans-serif`, fontSize: 12, color: B.gray500, fontWeight: 500 }}>
+                EntityLink — {entered ? "Northvale Israel Ltd." : "Legal Entities"}
+              </span>
+            </div>
+            <div style={{ position: "relative", lineHeight: 0 }}>
+              <img
+                src={A("/screenshots/01-legal-entities.png")}
+                alt="Legal Entities"
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "auto",
+                  opacity: entered ? 0 : 1,
+                  transform: entered ? "scale(1.08)" : "scale(1)",
+                  transition: `all 0.85s ${EASE}`,
+                }}
+              />
+              <EntityOverviewPanel shown={entered} />
+            </div>
+          </div>
+          <Callout active={active && !entered} delay={1500} color={B.na} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
             <FlatIcon name="building" size={16} color={B.na} /> כל הישויות — רשימה אחת
           </Callout>
-          <Callout active={active} delay={1750} color={B.primary} style={{ top: "38%", insetInlineStart: "-30px" }}>
-            <FlatIcon name="users" size={16} color={B.primary} /> מורשי חתימה
+          <Callout active={entered} delay={700} color={B.primary} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
+            <FlatIcon name="users" size={16} color={B.primary} /> פרופיל מלא לכל ישות
           </Callout>
         </div>
       </div>
