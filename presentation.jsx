@@ -678,7 +678,7 @@ function ProblemSlide({ active }) {
 const FEATURES = [
   { icon: "building", title: "ניהול ישויות", desc: "פרופיל מלא לכל חברה לאורך כל מחזור החיים" },
   { icon: "tree", title: "עץ ארגוני", desc: "מבנה האחזקות והבעלות במבט אחד" },
-  { icon: "gear", title: "תהליכי עבודה", desc: "Workflows וציות אוטומטיים עם דדליינים" },
+  { icon: "gear", title: "תהליכי עבודה", desc: "Workflows אוטומטיים עם דדליינים" },
   { icon: "globe", title: "מפה גלובלית", desc: "כל הישויות לפי אזור, סטטוס וסוג" },
   { icon: "folder", title: "ארכיון מסמכים", desc: "תיעוד מלא עם בקרת גרסאות" },
   { icon: "chart", title: "דוחות ואנליטיקה", desc: "ייצוא ל-PDF/Excel ומעקב KPI" },
