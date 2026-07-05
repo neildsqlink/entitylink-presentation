@@ -300,6 +300,14 @@ function FlatIcon({ name, size = 20, color = "currentColor", strokeWidth = 1.8 }
           <path d="M3 5h18l-7 8v5l-4 2v-7z" />
         </svg>
       );
+    case "download":
+      return (
+        <svg {...p}>
+          <path d="M12 3v12" />
+          <path d="M8 11l4 4 4-4" />
+          <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+        </svg>
+      );
     case "database":
       return (
         <svg {...p}>
@@ -852,7 +860,8 @@ function OrgTreeSlide({ active }) {
             {[
               { icon: "link", text: "מבנה אחזקות, חברות בנות ובעלי מניות" },
               { icon: "trend", text: "אחוזי החזקה, זכויות הצבעה וסוגי מניות" },
-              { icon: "filter", text: "צבעים לפי אזור · סינון · ייצוא ל-PDF" },
+              { icon: "filter", text: "צבעים לפי סוג ישות, אזור ופרמטרים נוספים" },
+              { icon: "download", text: "ייצוא מלא של העץ הארגוני" },
             ].map((item, i) => (
               <div
                 key={i}
