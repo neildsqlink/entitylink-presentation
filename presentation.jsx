@@ -743,9 +743,6 @@ function SolutionSlide({ active }) {
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 34, fontSize: "clamp(15px, 1.5vw, 19px)", color: B.gray500, ...rise(active, 1400, 14) }}>
-          ועכשיו — ארבעה מסכים אמיתיים מתוך המערכת <span style={{ color: B.primary, fontWeight: 700 }}>←</span>
-        </div>
       </div>
     </SlideWrap>
   );
