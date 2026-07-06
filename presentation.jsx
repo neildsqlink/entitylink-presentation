@@ -696,7 +696,7 @@ const FEATURES = [
   { icon: "building", title: "ניהול ישויות", desc: "פרופיל מלא לכל חברה לאורך כל מחזור החיים" },
   { icon: "tree", title: "עץ ארגוני", desc: "מבנה האחזקות והבעלות במבט אחד" },
   { icon: "gear", title: "תהליכי עבודה", desc: "Workflows אוטומטיים עם דדליינים" },
-  { icon: "globe", title: "מפה גלובלית", desc: "כל הישויות לפי אזור, סטטוס וסוג" },
+  { icon: "users", title: "נושאי משרה ובעלי תפקידים", desc: "דירקטורים, מורשי חתימה ונושאי משרה לכל ישות" },
   { icon: "folder", title: "ארכיון מסמכים", desc: "תיעוד מלא עם בקרת גרסאות" },
   { icon: "chart", title: "דוחות ואנליטיקה", desc: "ייצוא ל-PDF/Excel ומעקב KPI" },
 ];
@@ -1058,7 +1058,7 @@ function EntitiesSlide({ active }) {
                   height: "auto",
                   opacity: entered ? 0 : 1,
                   transform: entered ? "scale(1.08)" : "scale(1)",
-                  transition: `all 0.85s ${EASE}`,
+                  transition: `all 4s ${EASE}`,
                 }}
               />
               <img
@@ -1072,7 +1072,7 @@ function EntitiesSlide({ active }) {
                   display: "block",
                   opacity: entered ? 1 : 0,
                   transform: entered ? "scale(1)" : "scale(1.06)",
-                  transition: `all 0.85s ${EASE}`,
+                  transition: `all 4s ${EASE}`,
                 }}
               />
             </div>
