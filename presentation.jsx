@@ -1083,7 +1083,84 @@ function EntitiesSlide({ active }) {
   );
 }
 
-/* ══════════════════ SLIDE 6 — SHAREHOLDERS & TRANSACTIONS ══════════════════ */
+/* ══════════════════ SLIDE 6 — APPOINTMENTS (PEOPLE IN THE ENTITY) ══════════════════ */
+
+function AppointmentsSlide({ active }) {
+  return (
+    <SlideWrap active={active}>
+      <GridBackdrop />
+      <Glow x="88%" y="15%" color={B.primary} opacity={0.05} />
+      <div style={{ display: "grid", gridTemplateColumns: "0.82fr 1.5fr", gap: "3.2vw", alignItems: "center", width: "100%", maxWidth: 1520, position: "relative", zIndex: 1 }}>
+        <div>
+          <Kicker active={active}>נושאי משרה</Kicker>
+          <h2 style={{ fontSize: "clamp(27px, 3.3vw, 44px)", fontWeight: 800, lineHeight: 1.14, letterSpacing: "-0.5px", color: B.dark, margin: "0 0 24px", ...rise(active, 250) }}>
+            כל האנשים — <span style={{ color: B.primary }}>מסודרים בישות</span>
+          </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+            {[
+              { icon: "users", text: "דירקטורים, נושאי משרה ומורשי חתימה — לפי תפקיד" },
+              { icon: "pencil", text: "מי מוסמך לחתום ולחייב את החברה — ובאיזה היקף" },
+              { icon: "clock", text: "תאריכי מינוי, סטטוס והיסטוריה מלאה לכל אחד" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 13,
+                  fontSize: "clamp(15px, 1.45vw, 20px)",
+                  color: B.dark700,
+                  lineHeight: 1.4,
+                  ...riseX(active, 500 + i * 170),
+                }}
+              >
+                <IconBox name={item.icon} size={36} icon={18} />
+                {item.text}
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 24, fontSize: "clamp(13.5px, 1.3vw, 16px)", color: B.gray500, ...rise(active, 1100, 12) }}>
+            צריך להוכיח מי הוסמך לחתום? זה שם — בשניות.
+          </div>
+        </div>
+
+        <div style={{ position: "relative" }}>
+          <div
+            dir="ltr"
+            style={{
+              background: B.white,
+              border: `1px solid ${B.gray200}`,
+              borderRadius: 16,
+              boxShadow: "0 30px 70px rgba(15,23,42,0.16), 0 6px 18px rgba(15,23,42,0.06)",
+              overflow: "hidden",
+              opacity: active ? 1 : 0,
+              transform: active
+                ? "perspective(1400px) rotateX(0deg) translateY(0) scale(1)"
+                : "perspective(1400px) rotateX(10deg) translateY(46px) scale(0.94)",
+              transition: `all 1s ${EASE} 450ms`,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: B.gray100, borderBottom: `1px solid ${B.gray200}` }}>
+              <div style={{ display: "flex", gap: 6 }}>
+                {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+                  <span key={c} style={{ width: 11, height: 11, borderRadius: "50%", background: c }} />
+                ))}
+              </div>
+              <span style={{ fontFamily: `'${B.fontEn}', sans-serif`, fontSize: 12, color: B.gray500, fontWeight: 500 }}>
+                EntityLink — Northvale Israel Ltd.
+              </span>
+            </div>
+            <div style={{ lineHeight: 0 }}>
+              <img src={A("/screenshots/05-appointments.png")} alt="Appointments — Northvale Israel Ltd." style={{ display: "block", width: "100%", height: "auto" }} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </SlideWrap>
+  );
+}
+
+/* ══════════════════ SLIDE 7 — SHAREHOLDERS & TRANSACTIONS ══════════════════ */
 
 /* Mimics the real Shareholders screen: cap table + a live transaction.
    Northvale Holdings transfers 20% to a new investor — percentages
@@ -1615,67 +1692,161 @@ function ArchiveSlide({ active }) {
   );
 }
 
-/* ══════════════════ SLIDE 7 — CLOSING STATS ══════════════════ */
+/* ══════════════════ SLIDE 7 — OLD WORLD → NEW WORLD ══════════════════ */
 
-function StatBlock({ active, delay, target, suffix = "", prefix = "", label }) {
-  const val = useCountUp(active, target, { duration: 1600, delay });
+const OLDNEW_OLD = {
+  cards: [
+    { icon: "tree", title: "מבנה אחזקות", note: "אקסל ישן · לא מעודכן", style: "sticky" },
+    { icon: "link", title: "מי מחזיק במי?", note: "ימים של חיפוש", style: "search" },
+    { icon: "users", title: "דירקטורים ומורשי חתימה", note: "גרסאות סותרות", style: "doc" },
+    { icon: "chart", title: "ההון הרשום", note: "מפוזר בין קבצים", style: "sheet" },
+    { icon: "folder", title: "הכנה לביקורת / DD", note: "שבועות של איסוף", style: "folder" },
+    { icon: "envelope", title: "מסמכי התאגדות", note: "קבורים במיילים", style: "email" },
+  ],
+  drifters: [
+    { text: "מי חתם?", color: "red" },
+    { text: "לפני שנתיים?", color: "orange" },
+    { text: "לא מעודכן", color: "red" },
+    { text: "איזו גרסה?", color: "red" },
+    { text: "שבועות", color: "orange" },
+  ],
+};
+
+const OLDNEW_NEW = [
+  { label: "מבנה אחזקות", oldValue: "אקסל ידני", newValue: "בלחיצה" },
+  { label: "מי מחזיק במי", oldValue: "ימים", newValue: "בשניות" },
+  { label: "דירקטורים וחתימה", oldValue: "גרסאות", newValue: "לפי ישות" },
+  { label: "ההון הרשום", oldValue: "מפוזר", newValue: "תמיד מעודכן" },
+  { label: "מי החזיק מתי", oldValue: "לא ידוע", newValue: "היסטוריה מלאה" },
+  { label: "מסמכים", oldValue: "מיילים", newValue: "ארכיון מרוכז" },
+];
+
+const OLD_CARD_POS = [
+  { top: "6%", right: "6%", rotate: -5 },
+  { top: "9%", left: "8%", rotate: 4 },
+  { top: "39%", right: "3%", rotate: 3 },
+  { top: "43%", left: "4%", rotate: -3 },
+  { bottom: "7%", right: "16%", rotate: -2 },
+  { bottom: "9%", left: "18%", rotate: 5 },
+];
+
+function OldCard({ card, pos, delay, active, swayDur = 5, swayDelay = 0 }) {
+  const rot = pos.rotate || 0;
+  const styleByKind = {
+    doc: { background: B.white, border: `1px solid ${B.gray200}`, icon: B.na },
+    email: { background: "#FFF9EE", border: "1px solid #F0E2BE", icon: B.primary },
+    sheet: { background: "#E9F6EC", border: "1px solid #C9E2CF", icon: B.israel },
+    folder: { background: "#F1ECFB", border: "1px solid #DACFF0", icon: B.emea },
+    sticky: { background: "#FFF3A8", border: "1px solid #E9DC78", icon: "#9C7400" },
+    search: { background: B.white, border: `1px dashed ${B.red}`, icon: B.red },
+  };
+  const s = styleByKind[card.style] || styleByKind.doc;
   return (
-    <div style={{ textAlign: "center", ...rise(active, delay, 30) }}>
+    <div style={{ position: "absolute", top: pos.top, bottom: pos.bottom, left: pos.left, right: pos.right, opacity: active ? 1 : 0, transform: active ? "translateY(0) scale(1)" : "translateY(12px) scale(0.92)", transition: `all 0.7s ${EASE} ${delay}ms` }}>
       <div
-        dir="ltr"
         style={{
-          fontSize: "clamp(64px, 8.5vw, 118px)",
-          fontWeight: 900,
-          lineHeight: 1,
-          fontFamily: `'${B.fontEn}', sans-serif`,
-          background: `linear-gradient(135deg, ${B.primary}, ${B.primaryLight})`,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          fontVariantNumeric: "tabular-nums",
+          background: s.background, border: s.border, borderRadius: 8, padding: "10px 12px",
+          minWidth: 170, maxWidth: 220,
+          boxShadow: "0 10px 22px rgba(0,0,0,0.28), 0 2px 6px rgba(0,0,0,0.18)",
+          display: "flex", flexDirection: "column", gap: 4,
+          ["--rot"]: `${rot}deg`, transform: `rotate(${rot}deg)`,
+          animation: active ? `cardSway ${swayDur}s ease-in-out infinite` : "none",
+          animationDelay: active ? `${delay + 700 + swayDelay * 1000}ms` : undefined,
         }}
       >
-        {prefix}
-        {val}
-        {suffix}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ width: 22, height: 22, borderRadius: 6, background: `${s.icon}18`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <FlatIcon name={card.icon} size={13} color={s.icon} />
+          </div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: B.dark800, lineHeight: 1.2 }}>{card.title}</div>
+        </div>
+        {card.note && <div style={{ fontSize: 10, color: B.gray500, fontWeight: 400, lineHeight: 1.3 }}>{card.note}</div>}
       </div>
-      <div style={{ fontSize: "clamp(16px, 1.7vw, 22px)", color: B.gray500, marginTop: 12 }}>{label}</div>
     </div>
   );
 }
 
-function StatsSlide({ active }) {
+function OldWorldPanel({ active }) {
+  return (
+    <div style={{ flex: 1, position: "relative", background: `linear-gradient(160deg, #1e293b 0%, #0f172a 100%)`, borderRadius: 18, padding: "26px 22px", overflow: "hidden", boxShadow: "0 18px 50px rgba(15,23,42,0.2)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: `all 0.8s ${EASE} 450ms` }}>
+      <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)`, backgroundSize: "14px 14px", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", top: 16, insetInlineStart: 22, fontSize: 12, fontWeight: 800, letterSpacing: 1, color: "rgba(255,255,255,0.35)", fontFamily: `'${B.fontEn}', sans-serif` }}>פעם</div>
+      <div style={{ position: "relative", height: "100%" }}>
+        {OLDNEW_OLD.cards.map((c, i) => (
+          <OldCard key={i} card={c} pos={OLD_CARD_POS[i] || {}} delay={650 + i * 110} active={active} swayDur={4 + (i % 3) * 0.6} swayDelay={(i % 4) * 0.4} />
+        ))}
+        {active && OLDNEW_OLD.drifters.map((d, i) => {
+          const palette = { red: { bg: "rgba(239,68,68,0.18)", border: "rgba(239,68,68,0.45)", text: "#FFD2D2" }, orange: { bg: "rgba(245,158,11,0.16)", border: "rgba(245,158,11,0.4)", text: "#FFE2B0" } };
+          const p = palette[d.color] || palette.red;
+          const tops = ["18%", "55%", "30%", "70%", "42%"]; const lefts = ["22%", "10%", "60%", "50%", "30%"];
+          const dxs = ["-160px", "180px", "-150px", "200px", "-130px"]; const dys = ["-40px", "-55px", "30px", "-30px", "40px"];
+          return (
+            <div key={`drift-${i}`} style={{ position: "absolute", top: tops[i % 5], left: lefts[i % 5], padding: "5px 11px", borderRadius: 999, background: p.bg, border: `1px solid ${p.border}`, fontSize: 11, fontWeight: 700, color: p.text, whiteSpace: "nowrap", pointerEvents: "none", ["--dx"]: dxs[i % 5], ["--dy"]: dys[i % 5], animation: `driftAcross ${6.5 + (i % 3) * 1.4}s linear ${2 + i * 1.8}s infinite`, opacity: 0 }}>{d.text}</div>
+          );
+        })}
+        {active && [{ top: "12%", left: "44%", delay: "1.5s" }, { top: "60%", left: "70%", delay: "3.0s" }, { top: "28%", left: "80%", delay: "0.8s" }].map((q, i) => (
+          <div key={`q-${i}`} style={{ position: "absolute", top: q.top, left: q.left, fontSize: 26, fontWeight: 900, color: B.red, textShadow: "0 2px 8px rgba(239,68,68,0.5)", fontFamily: `'${B.fontEn}', sans-serif`, pointerEvents: "none", animation: `questionBob 3.8s ease-in-out ${q.delay} infinite`, opacity: 0 }}>?</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TransformationRow({ item, index, active }) {
+  const delay = 700 + index * 150;
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", borderRadius: 10, background: B.white, border: `1px solid ${B.gray200}`, boxShadow: "0 2px 8px rgba(15,23,42,0.04)", opacity: active ? 1 : 0, transform: active ? "translateX(0)" : "translateX(20px)", transition: `all 0.65s ${EASE} ${delay}ms` }}>
+      <div style={{ flex: "0 0 30%", fontSize: 12.5, fontWeight: 600, color: B.dark800, lineHeight: 1.25 }}>{item.label}</div>
+      <div style={{ flex: 1, fontSize: 12, color: B.gray500, textDecoration: "line-through", textDecorationColor: `${B.red}80`, textAlign: "center", opacity: 0.85, fontWeight: 500 }}>{item.oldValue}</div>
+      <div style={{ color: B.gray400, fontSize: 14, fontFamily: `'${B.fontEn}', sans-serif`, fontWeight: 700, opacity: active ? 1 : 0, transition: `opacity 0.4s ease ${delay + 200}ms` }}>←</div>
+      <div style={{ flex: 1, textAlign: "center", fontSize: 18, fontWeight: 800, background: `linear-gradient(135deg, ${B.primary}, ${B.na})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1.1, opacity: active ? 1 : 0, transform: active ? "scale(1)" : "scale(0.85)", transition: `all 0.55s ${EASE} ${delay + 280}ms` }}>{item.newValue}</div>
+      <span style={{ width: 22, height: 22, borderRadius: "50%", background: B.israel, color: B.white, fontSize: 12, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: active ? 1 : 0, transform: active ? "scale(1)" : "scale(0.5)", transition: `all 0.45s ${EASE} ${delay + 380}ms` }}>✓</span>
+    </div>
+  );
+}
+
+function NewWorldPanel({ active }) {
+  return (
+    <div style={{ flex: 1, position: "relative", background: `linear-gradient(160deg, ${B.white} 0%, ${B.gray100} 100%)`, borderRadius: 18, padding: "26px 22px", overflow: "hidden", border: `1px solid ${B.gray200}`, boxShadow: "0 18px 50px rgba(15,23,42,0.1)", opacity: active ? 1 : 0, transform: active ? "translateY(0)" : "translateY(20px)", transition: `all 0.8s ${EASE} 650ms`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 16, insetInlineStart: 22, fontSize: 12, fontWeight: 800, letterSpacing: 1, color: B.primary, fontFamily: `'${B.fontEn}', sans-serif` }}>עם EntityLink</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, overflow: "hidden", marginTop: 14 }}>
+        {OLDNEW_NEW.map((t, i) => <TransformationRow key={i} item={t} index={i} active={active} />)}
+      </div>
+    </div>
+  );
+}
+
+function CenterDivider({ active }) {
+  return (
+    <div style={{ width: 84, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, position: "relative", padding: "0 6px" }}>
+      <div style={{ width: 2, flex: 1, background: `linear-gradient(180deg, transparent, ${B.gray200}, transparent)` }} />
+      <div style={{ width: 62, height: 62, borderRadius: "50%", background: `linear-gradient(135deg, ${B.primary}, ${B.na})`, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 14px 32px ${B.primary}55, 0 6px 14px ${B.na}33`, transform: active ? "scale(1)" : "scale(0.6)", opacity: active ? 1 : 0, transition: `all 0.8s ${EASE} 1000ms` }}>
+        <FlatIcon name="link" size={28} color={B.white} />
+      </div>
+      <div style={{ fontSize: 22, color: B.gray400, lineHeight: 1, opacity: active ? 1 : 0, transform: active ? "translateX(0)" : "translateX(10px)", transition: `all 0.6s ${EASE} 1300ms` }}>←</div>
+      <div style={{ width: 2, flex: 1, background: `linear-gradient(180deg, transparent, ${B.gray200}, transparent)` }} />
+    </div>
+  );
+}
+
+function OldNewSlide({ active }) {
   return (
     <SlideWrap active={active}>
       <GridBackdrop />
-      <HeroNetwork active={active} />
-      <div style={{ textAlign: "center", position: "relative", zIndex: 1, maxWidth: 1100 }}>
-        <Kicker active={active} delay={100} center>
-          השורה התחתונה
-        </Kicker>
-        <h2 style={{ fontSize: "clamp(36px, 4.6vw, 60px)", fontWeight: 800, lineHeight: 1.12, letterSpacing: "-1px", color: B.dark, margin: "0 0 56px", ...rise(active, 250) }}>
-          ממידע מפוזר — <span style={{ color: B.primary }}>לשליטה אחת</span>
-        </h2>
-        <div style={{ display: "flex", justifyContent: "center", gap: "clamp(48px, 7vw, 110px)", marginBottom: 60 }}>
-          <StatBlock active={active} delay={600} target={1} label="מקור אמת" />
-          <StatBlock active={active} delay={850} target={500} suffix="+" label="ישויות מנוהלות" />
-          <StatBlock active={active} delay={1100} target={100} suffix="%" label="תיעוד ומעקב" />
+      <Glow x="88%" y="12%" color={B.primary} opacity={0.05} />
+      <div style={{ zIndex: 1, maxWidth: 1320, width: "100%", position: "relative" }}>
+        <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <h2 style={{ fontSize: "clamp(26px, 3.6vw, 44px)", fontWeight: 800, letterSpacing: "-0.5px", color: B.dark, margin: 0, ...rise(active, 200) }}>
+            מהעולם הישן — <span style={{ color: B.primary }}>לעולם החדש</span>
+          </h2>
         </div>
-        <div
-          style={{
-            fontSize: "clamp(22px, 2.6vw, 34px)",
-            fontWeight: 800,
-            ...rise(active, 1900, 20),
-          }}
-        >
-          <span
-            style={{
-              background: `linear-gradient(90deg, ${B.dark} 30%, ${B.primary} 50%, ${B.dark} 70%)`,
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              animation: active ? "shimmer 3.5s linear 2400ms infinite" : "none",
-            }}
-          >
+        <div style={{ display: "flex", alignItems: "stretch", gap: 0, height: "min(54vh, 470px)" }}>
+          <OldWorldPanel active={active} />
+          <CenterDivider active={active} />
+          <NewWorldPanel active={active} />
+        </div>
+        <div style={{ marginTop: 26, textAlign: "center", fontSize: "clamp(20px, 2.4vw, 30px)", fontWeight: 800, ...rise(active, 1700, 18) }}>
+          <span style={{ background: `linear-gradient(90deg, ${B.dark} 30%, ${B.primary} 50%, ${B.dark} 70%)`, backgroundSize: "200% auto", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", animation: active ? "shimmer 3.5s linear 2200ms infinite" : "none" }}>
             EntityLink — נהלו כל ישות, מעבר לכל גבול.
           </span>
         </div>
@@ -1739,7 +1910,7 @@ function ThanksSlide({ active }) {
 
 /* ══════════════════ DECK SHELL ══════════════════ */
 
-const SLIDE_COMPONENTS = [HeroSlide, ProblemSlide, SolutionSlide, OrgTreeSlide, EntitiesSlide, ShareholdersSlide, ArchiveSlide, StatsSlide, ThanksSlide];
+const SLIDE_COMPONENTS = [HeroSlide, ProblemSlide, SolutionSlide, OrgTreeSlide, EntitiesSlide, AppointmentsSlide, ShareholdersSlide, ArchiveSlide, OldNewSlide, ThanksSlide];
 
 export default function Presentation() {
   const [current, setCurrent] = useState(0);
@@ -1803,6 +1974,7 @@ export default function Presentation() {
         @keyframes nodeBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
         @keyframes cardSway { 0%, 100% { transform: rotate(var(--rot, 0deg)) translateY(0); } 50% { transform: rotate(calc(var(--rot, 0deg) + 1.6deg)) translateY(-4px); } }
         @keyframes questionBob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(4deg); } }
+        @keyframes driftAcross { 0% { transform: translateX(0) translateY(0); opacity: 0; } 15% { opacity: 0.95; } 80% { opacity: 0.95; } 100% { transform: translateX(var(--dx, 220px)) translateY(var(--dy, -30px)); opacity: 0; } }
         @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(232,97,45,0.35); } 100% { box-shadow: 0 0 0 14px rgba(232,97,45,0); } }
         ::selection { background: rgba(232,97,45,0.2); }
       `}</style>
