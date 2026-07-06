@@ -624,7 +624,7 @@ function ProblemSlide({ active }) {
             ))}
           </div>
           <div style={{ marginTop: 28, fontSize: "clamp(15px, 1.5vw, 19px)", fontWeight: 600, color: B.primaryDark, fontStyle: "italic", ...rise(active, 1250, 14) }}>
-            וכשהרגולטור שואל שאלה — מבזבזים ימים על איסוף מידע.
+            מגיעה שאלה מהרגולטור או הדירקטוריון — שעות של עבודה במקום דקות.
           </div>
         </div>
 
@@ -867,8 +867,8 @@ function OrgTreeSlide({ active }) {
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {[
               { icon: "link", text: "מבנה אחזקות, חברות בנות ובעלי מניות" },
-              { icon: "trend", text: "אחוזי החזקה, זכויות הצבעה וסוגי מניות" },
               { icon: "filter", text: "צבעים לפי סוג ישות, אזור ופרמטרים נוספים" },
+              { icon: "trend", text: "אחוזי החזקה, זכויות הצבעה וסוגי מניות" },
               { icon: "download", text: "ייצוא מלא של העץ הארגוני" },
             ].map((item, i) => (
               <div
@@ -1657,7 +1657,7 @@ function StatsSlide({ active }) {
         </h2>
         <div style={{ display: "flex", justifyContent: "center", gap: "clamp(48px, 7vw, 110px)", marginBottom: 60 }}>
           <StatBlock active={active} delay={600} target={1} label="מקור אמת" />
-          <StatBlock active={active} delay={850} target={50} prefix="+" label="מדינות" />
+          <StatBlock active={active} delay={850} target={500} suffix="+" label="ישויות מנוהלות" />
           <StatBlock active={active} delay={1100} target={100} suffix="%" label="תיעוד ומעקב" />
         </div>
         <div
