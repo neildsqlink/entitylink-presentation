@@ -633,27 +633,36 @@ function ProblemSlide({ active }) {
           {CHAOS_CARDS.map((c, i) => (
             <div
               key={i}
+              dir="rtl"
               style={{
                 position: "absolute",
                 left: c.x,
                 top: c.y,
-                width: "min(46%, 250px)",
+                width: "min(50%, 264px)",
                 "--rot": `${c.rot}deg`,
-                background: B.white,
-                border: `1px solid ${B.gray200}`,
-                borderTop: `4px solid ${c.color}`,
-                borderRadius: 14,
-                padding: "16px 18px",
-                boxShadow: "0 18px 44px rgba(15,23,42,0.13)",
+                display: "flex",
+                alignItems: "center",
+                gap: 13,
+                background: `linear-gradient(180deg, #ffffff 0%, ${c.color}0a 100%)`,
+                border: `1px solid ${c.color}2e`,
+                borderRadius: 18,
+                padding: "15px 16px",
+                boxShadow: `0 22px 46px -14px ${c.color}3d, 0 4px 14px rgba(15,23,42,0.06)`,
+                backdropFilter: "blur(2px)",
                 opacity: active ? 1 : 0,
                 transform: active ? `rotate(${c.rot}deg) scale(1)` : `rotate(${c.rot * 2.4}deg) scale(0.55) translateY(60px)`,
                 transition: `all 0.85s ${EASE} ${650 + i * 190}ms`,
                 animation: active ? `cardSway ${4.5 + i * 0.7}s ease-in-out ${i * 0.6}s infinite` : "none",
               }}
             >
-              <IconBox name={c.icon} color={c.color} size={40} icon={21} style={{ marginBottom: 10 }} />
-              <div dir="auto" style={{ fontWeight: 700, fontSize: 15, color: B.dark, marginBottom: 4 }}>{c.label}</div>
-              <div style={{ fontSize: 13, color: B.gray500 }}>{c.note}</div>
+              <IconBox name={c.icon} color={c.color} size={42} icon={21} style={{ flexShrink: 0 }} />
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div dir="auto" style={{ fontWeight: 700, fontSize: 14.5, lineHeight: 1.3, color: B.dark, marginBottom: 4 }}>{c.label}</div>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: B.gray500 }}>
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", background: c.color, flexShrink: 0 }} />
+                  <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.note}</span>
+                </div>
+              </div>
             </div>
           ))}
           {["?", "!", "?"].map((q, i) => (
@@ -852,7 +861,6 @@ function OrgTreeSlide({ active }) {
       <Glow x="14%" y="80%" color={B.israel} opacity={0.05} />
       <div style={{ display: "grid", gridTemplateColumns: "0.75fr 1.6fr", gap: "3vw", alignItems: "center", width: "100%", maxWidth: 1500, position: "relative", zIndex: 1 }}>
         <div>
-          <Kicker active={active}>הדמיה חיה מהמערכת</Kicker>
           <h2 style={{ fontSize: "clamp(28px, 3.2vw, 44px)", fontWeight: 800, lineHeight: 1.14, letterSpacing: "-0.5px", color: B.dark, margin: "0 0 26px", ...rise(active, 250) }}>
             עץ ארגוני — כל המבנה <span style={{ color: B.primary }}>במבט אחד</span>
           </h2>
@@ -963,120 +971,6 @@ function OrgTreeSlide({ active }) {
 
 /* ══════════════════ SLIDE 5 — ENTITY MANAGEMENT ══════════════════ */
 
-const ENTITY_FIELDS = [
-  ["Name In Local Language", "נורת׳וייל ישראל בע״מ", true],
-  ["Entity's Form", "Private Company Ltd."],
-  ["Doing Business As", "Northvale Israel"],
-  ["Tax ID", "514489237"],
-  ["Main Shareholder", "Northvale Holdings"],
-  ["Date of Incorporation", "03 Sep 2014"],
-  ["Government Agency Of Reg.", "Registrar of Companies"],
-  ["Date of Acquisition", "12 Mar 2019"],
-  ["Sub Group", "EMEA · Israel"],
-  ["Secondary Status", "Trading"],
-  ["Abbr", "NVIL"],
-  ["Link to Registrar Extract", "View"],
-];
-
-function EntityOverviewPanel({ shown }) {
-  const label = { fontSize: 8.5, color: B.gray400, marginBottom: 2, letterSpacing: 0.2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" };
-  const val = { fontSize: 11, fontWeight: 600, color: B.dark, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" };
-  const navItems = ["Overview", "Addresses", "Appointments", "Subsidiaries & Branches", "Shareholders"];
-  const idCard = [["Entity Type", "Group Company"], ["#SAP", "12345"], ["Country", "🇮🇱 Israel"], ["Registered Number", "514489237"]];
-  return (
-    <div
-      dir="ltr"
-      style={{
-        position: "absolute",
-        inset: 0,
-        background: B.white,
-        display: "grid",
-        gridTemplateColumns: "34% 1fr",
-        fontFamily: `'${B.fontEn}', sans-serif`,
-        textAlign: "left",
-        lineHeight: 1.35,
-        overflow: "hidden",
-        opacity: shown ? 1 : 0,
-        transform: shown ? "scale(1)" : "scale(0.96)",
-        transition: `all 0.85s ${EASE}`,
-      }}
-    >
-      {/* sidebar */}
-      <div style={{ background: B.gray100, borderRight: `1px solid ${B.gray200}`, padding: "12px 12px 8px", display: "flex", flexDirection: "column", gap: 6 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, color: B.gray500, fontSize: 10, fontWeight: 600 }}>
-          <FlatIcon name="globe" size={12} color={B.gray500} /> Legal Entities
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 9.5, color: "#059669", fontWeight: 600 }}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#10b981" }} /> Active
-        </div>
-        <div style={{ fontSize: 13, fontWeight: 800, color: B.dark, marginBottom: 2 }}>Northvale Israel Ltd.</div>
-        <div style={{ background: B.white, border: `1px solid ${B.gray200}`, borderRadius: 8, padding: "8px 9px", display: "flex", flexDirection: "column", gap: 6 }}>
-          {idCard.map(([k, v], i) => (
-            <div key={i}>
-              <div style={label}>{k}</div>
-              <div style={{ ...val, fontSize: 10.5 }}>{v}</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 1, marginTop: 4 }}>
-          {navItems.map((n, i) => (
-            <div key={i} style={{ fontSize: 10, fontWeight: i === 0 ? 700 : 500, color: i === 0 ? B.primary : B.gray500, background: i === 0 ? "rgba(232,97,45,0.1)" : "transparent", borderRadius: 6, padding: "4px 7px" }}>
-              {n}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* main */}
-      <div style={{ padding: "11px 15px", display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 3 }}>
-          <div style={{ fontSize: 9, color: B.gray400 }}>Home / Legal Entities / <span style={{ color: B.gray500 }}>Northvale Israel Ltd.</span> / <span style={{ color: B.dark, fontWeight: 600 }}>Overview</span></div>
-          <div style={{ background: B.primary, color: B.white, fontSize: 9.5, fontWeight: 600, padding: "3px 11px", borderRadius: 999, display: "flex", alignItems: "center", gap: 4 }}>
-            <FlatIcon name="pencil" size={10} color={B.white} /> Edit
-          </div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 15, fontWeight: 800, color: B.dark, marginBottom: 11 }}>
-          <FlatIcon name="globe" size={15} color={B.primary} /> Overview
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", rowGap: 11, columnGap: 14, background: B.white, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "13px 15px" }}>
-          {ENTITY_FIELDS.map(([k, v, rtl], i) => (
-            <div key={i}>
-              <div style={label}>{k}</div>
-              <div dir={rtl ? "rtl" : "ltr"} style={{ ...val, color: v === "View" ? B.primary : B.dark }}>{v}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* compliance + directors strip */}
-        <div style={{ display: "flex", gap: 10, marginTop: 11, alignItems: "stretch" }}>
-          <div style={{ flex: 1.6, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "9px 12px" }}>
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: B.gray400, letterSpacing: 0.4, marginBottom: 6 }}>COMPLIANCE</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 10, color: B.dark700, marginBottom: 5 }}>
-              <FlatIcon name="check" size={12} color="#059669" /> Annual Report 2025
-              <span style={{ marginLeft: "auto", fontSize: 8.5, fontWeight: 700, color: "#059669", background: "rgba(16,185,129,0.12)", borderRadius: 999, padding: "2px 7px" }}>Filed</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 10, color: B.dark700 }}>
-              <FlatIcon name="clock" size={12} color={B.primary} /> Board Meeting Q3
-              <span style={{ marginLeft: "auto", fontSize: 8.5, fontWeight: 700, color: B.primaryDark, background: "rgba(232,97,45,0.12)", borderRadius: 999, padding: "2px 7px" }}>30 Sep</span>
-            </div>
-          </div>
-          <div style={{ flex: 1, border: `1px solid ${B.gray200}`, borderRadius: 10, padding: "9px 12px" }}>
-            <div style={{ fontSize: 8.5, fontWeight: 700, color: B.gray400, letterSpacing: 0.4, marginBottom: 7 }}>DIRECTORS</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {[["ד.ל", "Dana Levy", "#5877E6"], ["א.כ", "Avi Cohen", "#16A34A"]].map(([ini, nm, bg], i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                  <span style={{ width: 18, height: 18, borderRadius: "50%", background: bg, color: B.white, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 8 }}>{ini}</span>
-                  <span style={{ fontSize: 10, fontWeight: 600, color: B.dark }}>{nm}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function EntitiesSlide({ active }) {
   const [entered, setEntered] = useState(false);
@@ -1167,15 +1061,22 @@ function EntitiesSlide({ active }) {
                   transition: `all 0.85s ${EASE}`,
                 }}
               />
-              <EntityOverviewPanel shown={entered} />
+              <img
+                src={A("/screenshots/04-entity-overview.png")}
+                alt="Northvale Israel Ltd. — Overview"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  display: "block",
+                  opacity: entered ? 1 : 0,
+                  transform: entered ? "scale(1)" : "scale(1.06)",
+                  transition: `all 0.85s ${EASE}`,
+                }}
+              />
             </div>
           </div>
-          <Callout active={active && !entered} delay={1500} color={B.na} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
-            <FlatIcon name="building" size={16} color={B.na} /> כל הישויות — רשימה אחת
-          </Callout>
-          <Callout active={entered} delay={700} color={B.primary} style={{ bottom: "-16px", insetInlineStart: "10%" }}>
-            <FlatIcon name="users" size={16} color={B.primary} /> פרופיל מלא לכל ישות
-          </Callout>
         </div>
       </div>
     </SlideWrap>
@@ -1242,7 +1143,7 @@ function ShareholdersSlide({ active }) {
       <Glow x="12%" y="80%" color={B.emea} opacity={0.05} />
       <div style={{ display: "grid", gridTemplateColumns: "0.85fr 1.35fr", gap: "3.5vw", alignItems: "center", width: "100%", maxWidth: 1460, position: "relative", zIndex: 1 }}>
         <div>
-          <Kicker active={active}>בעלי מניות · Cap Table</Kicker>
+          <Kicker active={active}>בעלי מניות</Kicker>
           <h2 style={{ fontSize: "clamp(28px, 3.4vw, 46px)", fontWeight: 800, lineHeight: 1.14, letterSpacing: "-0.5px", color: B.dark, margin: "0 0 26px", ...rise(active, 250) }}>
             בעלי מניות — <span style={{ color: B.primary }}>כל טרנזקציה מתועדת</span>
           </h2>
